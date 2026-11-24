@@ -1,0 +1,2127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded Iris Photography — Listing Media Delivery Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Analytics 4 (GA4 Property: 416748801 | Stream: G-F615S722W4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F615S722W4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F615S722W4', {
+      cookie_flags: 'SameSite=None;Secure',
+      send_page_view: true
+    });
+    function trackGAEvent(eventName, params) {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', eventName, params || {});
+        }
+      } catch (e) {}
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-dark: #0f1013;
+      --card-bg: #16181e;
+      --card-border: #262933;
+      --gold-primary: #d4af37;
+      --gold-light: #f5e7b2;
+      --gold-hover: #b89728;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --radius: 12px;
+      --transition: all 0.25s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding: 0 0 60px 0;
+      height: auto;
+      overflow-x: hidden;
+    }
+
+    /* Responsive Mobile vs. Desktop Zelle Checkout Card */
+    .zelle-checkout-card {
+      background: #14161b;
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 14px 0;
+      text-align: left;
+    }
+
+    .zelle-checkout-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .zelle-copy-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .zelle-tap-copy-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 14px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .zelle-tap-copy-btn.copied-state {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(16, 185, 129, 0.12));
+      border-color: var(--accent-green);
+      color: #6ee7b7;
+    }
+
+    .zelle-tap-copy-btn .copy-pill {
+      background: var(--gold-primary);
+      color: #0b0c10;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .zelle-tap-copy-btn.copied-state .copy-pill {
+      background: var(--accent-green);
+      color: #052e16;
+    }
+
+    .zelle-qr-column {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid var(--gold-primary);
+      min-width: 152px;
+      text-align: center;
+    }
+
+    .zelle-qr-column img {
+      width: 124px;
+      height: 124px;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .zelle-qr-caption {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #111215;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    .zelle-email-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      font-size: 12px;
+      color: #e0f2fe;
+      line-height: 1.45;
+    }
+
+    @media (min-width: 768px) {
+      .zelle-checkout-grid {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .zelle-qr-column {
+        display: flex;
+      }
+    }
+
+    /* Top Navigation / Brand Bar */
+    .top-nav {
+      background: rgba(18, 20, 26, 0.95);
+      border-bottom: 1px solid var(--card-border);
+      padding: 18px 24px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(12px);
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 19px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo span {
+      color: var(--gold-primary);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: var(--transition);
+    }
+
+    .status-locked {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid var(--accent-red);
+      color: #fca5a5;
+    }
+
+    .status-unlocked {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid var(--accent-green);
+      color: #6ee7b7;
+    }
+
+    .admin-link-btn {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px dashed rgba(212, 175, 55, 0.5);
+      color: var(--gold-light);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+      display: none;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .admin-link-btn:hover {
+      background: rgba(212, 175, 55, 0.15);
+      border-color: var(--gold-primary);
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero-banner {
+      max-width: 1200px;
+      margin: 28px auto 20px;
+      padding: 0 20px;
+    }
+
+    .property-title {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .property-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      color: var(--text-muted);
+      font-size: 13px;
+      align-items: center;
+    }
+
+    .meta-tag {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Paywall Action Banner */
+    .paywall-banner {
+      background: linear-gradient(135deg, #1b1e26, #161820);
+      border: 1.5px solid var(--gold-primary);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-top: 20px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      transition: var(--transition);
+    }
+
+    .paywall-left {
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .paywall-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .paywall-desc {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .paywall-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .invoice-amount {
+      text-align: right;
+    }
+
+    .amount-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+    }
+
+    .amount-val {
+      font-family: 'Cinzel', serif;
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--gold-primary);
+    }
+
+    .pay-btn {
+      background-color: var(--gold-primary);
+      background: linear-gradient(135deg, #d4af37, #b89728);
+      border: none;
+      border-radius: 8px;
+      padding: 14px 24px;
+      color: #0b0c0e;
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      transition: var(--transition);
+    }
+
+    .pay-btn:hover {
+      background-color: var(--gold-hover);
+      background: linear-gradient(135deg, #e5c358, #c9a738);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0, 0, 0, 0.55);
+    }
+
+    /* Unlocked Downloads Bar */
+    .downloads-bar {
+      display: none;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1.5px solid var(--accent-green);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-top: 20px;
+      animation: fadeIn 0.4s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .downloads-title {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: #6ee7b7;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .downloads-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .dl-btn {
+      background: #1f2229;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .dl-btn:hover {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.15);
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .dl-btn.primary {
+      background-color: var(--gold-primary);
+      background: linear-gradient(135deg, #d4af37, #b89728);
+      color: #0b0c0e;
+      border: none;
+      font-weight: 700;
+    }
+
+    .dl-btn.primary:hover {
+      background-color: var(--gold-hover);
+      background: linear-gradient(135deg, #e5c358, #c9a738);
+      color: #0b0c0e;
+      border: none;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Gallery Grid */
+    .gallery-container {
+      max-width: 1200px;
+      margin: 28px auto 0;
+      padding: 0 20px;
+    }
+
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .gallery-count {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 18px;
+    }
+
+    .photo-card {
+      position: relative;
+      background: #181a20;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      cursor: pointer;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Dynamic Watermark Overlay */
+    .watermark-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        rgba(0, 0, 0, 0.35),
+        rgba(0, 0, 0, 0.35) 60px,
+        rgba(0, 0, 0, 0.5) 60px,
+        rgba(0, 0, 0, 0.5) 120px
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+    }
+
+    .watermark-text {
+      font-family: 'Cinzel', serif;
+      color: rgba(255, 255, 255, 0.85);
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      transform: rotate(-15deg);
+      border: 2px dashed rgba(212, 175, 55, 0.7);
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    .watermark-overlay.unlocked {
+      opacity: 0;
+      display: none;
+    }
+
+    /* Toast Notification */
+    .toast-notification {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #1a1d24;
+      border: 1px solid var(--gold-primary);
+      color: #fff;
+      padding: 14px 20px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13.5px;
+      z-index: 999;
+      transform: translateY(120%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-notification.show {
+      transform: translateY(0);
+    }
+
+    /* Checkout Modal */
+    .modal-backdrop, .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 10000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .modal-overlay.active {
+      display: flex !important;
+    }
+
+    .modal-card {
+      background: #181a20;
+      border: 1px solid var(--gold-primary);
+      border-radius: var(--radius);
+      max-width: 480px;
+      width: 100%;
+      padding: 28px 24px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-size: 22px;
+      background: none;
+      border: none;
+      line-height: 1;
+    }
+
+    .modal-title {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .invoice-line-items {
+      margin: 18px 0;
+      border-top: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--card-border);
+      padding: 12px 0;
+      max-height: 220px;
+      overflow-y: auto;
+    }
+
+    .line-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 0;
+      color: #cbd5e1;
+    }
+
+    .line-item.total {
+      font-weight: 700;
+      color: var(--gold-primary);
+      font-size: 15.5px;
+      border-top: 1px dashed var(--card-border);
+      margin-top: 8px;
+      padding-top: 10px;
+    }
+
+    /* PORTAL UPSELL & ENHANCEMENT STYLES */
+    .portal-upsell-panel {
+      background: linear-gradient(135deg, rgba(22, 24, 30, 0.95), rgba(16, 18, 23, 0.95));
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .upsell-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .upsell-summary-badge {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--gold-primary);
+      color: var(--gold-primary);
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .upsell-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 12px;
+    }
+
+    .upsell-card {
+      background: rgba(25, 28, 36, 0.7);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .upsell-card:hover {
+      border-color: rgba(212, 175, 55, 0.6);
+      background: rgba(30, 34, 44, 0.85);
+      transform: translateY(-2px);
+    }
+
+    .upsell-card.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.12);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .upsell-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .upsell-info {
+      flex: 1;
+    }
+
+    .upsell-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .upsell-price {
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .upsell-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    .upsell-btn {
+      background: #252833;
+      border: 1px solid var(--card-border);
+      color: #e2e8f0;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .upsell-btn:hover {
+      background: #2f3342;
+      color: #ffffff;
+      border-color: var(--gold-primary);
+    }
+
+    .upsell-card.active .upsell-btn {
+      background: var(--gold-primary);
+      color: #0b0c0e;
+      border-color: var(--gold-primary);
+    }
+
+    .upsell-card.active .upsell-btn:hover {
+      background: var(--gold-hover);
+      color: #0b0c0e;
+    }
+
+    /* In-Gallery Photo Cards with Chips */
+    .portal-card-box {
+      background: #15171d;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .portal-card-box:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .portal-card-box.has-enhancement {
+      border-color: var(--gold-primary);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .portal-card-footer {
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #111318;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .photo-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: #f1f5f9;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .photo-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .chip-btn {
+      background: #1a1d24;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #94a3b8;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+
+    .chip-btn:hover {
+      border-color: var(--gold-primary);
+      color: #fff;
+      background: rgba(212, 175, 55, 0.1);
+    }
+
+    .chip-btn.active {
+      background: rgba(212, 175, 55, 0.2);
+      border-color: var(--gold-primary);
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .form-input-note {
+      width: 100%;
+      background: #12141a;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      color: #fff;
+      font-family: 'Montserrat', sans-serif;
+      box-sizing: border-box;
+    }
+
+    .form-input-note:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+    }
+
+    @media (max-width: 768px) {
+      input, select, textarea, .form-input-note {
+        font-size: 16px !important;
+      }
+      .top-nav {
+        padding: 12px 14px;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .hero-banner {
+        padding: 20px 14px 16px;
+      }
+      .property-title {
+        font-size: 20px;
+      }
+      .paywall-banner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 16px;
+      }
+      .upsell-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+      .upsell-grid, .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Nav Bar -->
+  <nav class="top-nav">
+    <div class="brand-logo" ondblclick="promptAdminToolkitAccess()">
+      GILDED <span>IRIS</span> MEDIA
+    </div>
+    <div class="nav-actions" style="display: flex; align-items: center; gap: 10px;">
+      <button type="button" id="adminToolkitBtn" class="admin-link-btn" style="display: none;" onclick="openLinkGenModal()" title="Photographer Toolkit">
+        🛠️ Photographer Toolkit
+      </button>
+      <div id="statusBadge" class="badge-status status-locked" style="display: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Payment Pending (Watermarked)
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Details -->
+  <header class="hero-banner">
+    <h1 class="property-title" id="portalAddressTitle">Client Delivery Portal</h1>
+    <div class="property-meta" id="portalPropertyMeta">
+      <span class="meta-tag" id="portalClientTag">🔍 Enter your address or email below to find your listing media</span>
+    </div>
+
+    <!-- Paywall Callout Banner (Hidden until a property is queried) -->
+    <div id="paywallBanner" class="paywall-banner" style="display: none;">
+      <div class="paywall-left">
+        <div class="paywall-heading">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+          Settle Invoice to Unlock Unwatermarked Media
+        </div>
+        <p class="paywall-desc">
+          Review your listing media below. Once the outstanding balance is settled, watermarks will immediately vanish and all full-resolution and MLS-ready download buttons will unlock.
+        </p>
+      </div>
+
+      <div class="paywall-right">
+        <div class="invoice-amount">
+          <div class="amount-label">Outstanding Balance</div>
+          <div class="amount-val" id="portalPriceDisplay">$0.00</div>
+        </div>
+        <button onclick="openPaymentModal()" class="pay-btn" id="payNowBtn">
+          Pay & Unlock Downloads
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Interactive Upsell & Post-Shoot Add-on Banner (Hidden until a property is queried) -->
+    <div class="portal-upsell-panel" id="portalUpsellPanel" style="display: none;">
+      <div class="upsell-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span style="font-size: 22px;">✨</span>
+          <div>
+            <div style="font-size: 14.5px; font-weight: 700; color: #fff;">Proof-Driven Visual Enhancements (1-Click Checkout Add-Ons)</div>
+            <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">
+              Spot a photo that needs sunset glow or staging? Add below or on any proof photo. <strong style="color: #6ee7b7;">⚡ Base media unlocks immediately. Custom enhancements delivered within 12–24 hours.</strong>
+            </div>
+          </div>
+        </div>
+        <div id="upsellAddedBadge" class="upsell-summary-badge" style="display: none;">
+          +<span id="upsellCount">0</span> Add-on(s) (+$<span id="upsellTotal">0</span>)
+        </div>
+      </div>
+
+      <div class="upsell-grid">
+        <!-- Card 1: Day-to-Dusk Twilight -->
+        <div class="upsell-card" id="cardUpsell-twilight" onclick="toggleGlobalUpsell('twilight', 25, 'Day-to-Dusk Sunset Twilight')">
+          <div class="upsell-icon">🌅</div>
+          <div class="upsell-info">
+            <div class="upsell-title">Day-to-Dusk Twilight <span class="upsell-price">+$25/photo</span></div>
+            <div class="upsell-desc">Convert a sunny exterior into an ultra-luxury sunset twilight cover shot.</div>
+          </div>
+          <button type="button" class="upsell-btn">+ Add</button>
+        </div>
+
+        <!-- Card 2: Virtual Staging -->
+        <div class="upsell-card" id="cardUpsell-staging" onclick="toggleGlobalUpsell('staging', 20, 'Virtual Staging')">
+          <div class="upsell-icon">🛋️</div>
+          <div class="upsell-info">
+            <div class="upsell-title">Virtual Staging <span class="upsell-price">+$20/photo</span></div>
+            <div class="upsell-desc">Transform vacant living rooms or primary suites into designer spaces.</div>
+          </div>
+          <button type="button" class="upsell-btn">+ Add</button>
+        </div>
+
+        <!-- Card 3: Turf Greening & Sky Replacement -->
+        <div class="upsell-card" id="cardUpsell-lawn" onclick="toggleGlobalUpsell('lawn', 20, 'Turf Greening & Sky Replacement')">
+          <div class="upsell-icon">🌿</div>
+          <div class="upsell-info">
+            <div class="upsell-title">Turf &amp; Sky Fix <span class="upsell-price">+$20/photo</span></div>
+            <div class="upsell-desc">Digital repair of patchy Florida lawns, brown grass, and overcast skies.</div>
+          </div>
+          <button type="button" class="upsell-btn">+ Add</button>
+        </div>
+
+        <!-- Card 4: Item Decluttering & Object Removal -->
+        <div class="upsell-card" id="cardUpsell-removal" onclick="toggleGlobalUpsell('removal', 15, 'Item Decluttering & Object Removal')">
+          <div class="upsell-icon">🪄</div>
+          <div class="upsell-info">
+            <div class="upsell-title">Item Decluttering <span class="upsell-price">+$15/photo</span></div>
+            <div class="upsell-desc">Erase trash cans, driveway cars, pool hoses, cords, or personal clutter.</div>
+          </div>
+          <button type="button" class="upsell-btn">+ Add</button>
+        </div>
+      </div>
+
+      <!-- Notes Input when add-on is active -->
+      <div id="upsellNotesBox" style="display: none; margin-top: 14px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.08);">
+        <label for="upsellNotesInput" style="font-size: 12px; font-weight: 700; color: var(--gold-primary); letter-spacing: 0.3px;">
+          Enhancement Instructions for Jorge (Base media unlocks immediately • Custom edits delivered in 12–24 hrs):
+        </label>
+        <input type="text" id="upsellNotesInput" class="form-input-note" style="margin-top: 6px; font-size: 13px;" placeholder="e.g. Front exterior Day-to-Dusk Twilight; stage Living Room in Modern Coastal">
+      </div>
+    </div>
+
+    <!-- Unlocked Downloads Bar -->
+    <div id="downloadsBar" class="downloads-bar">
+      <div class="downloads-title">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        Invoice Settled — Base Media &amp; High-Res Downloads Unlocked Immediately!
+      </div>
+      <p style="font-size: 13px; color: var(--text-muted); margin-top: 4px;">
+        Watermarks have been removed from your gallery. Access your organized Google Drive folders below right now. <span style="color: var(--gold-light); font-weight: 600;">(If you added custom visual enhancements at checkout, they will be delivered to this folder within 12–24 hours.)</span>
+      </p>
+      <div class="downloads-buttons">
+        <button onclick="triggerFileDownload('1_MLS_Web_Optimized')" class="dl-btn primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download MLS Ready (Web Optimized)
+        </button>
+
+        <button onclick="triggerFileDownload('2_Print_High_Resolution')" class="dl-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download Print Quality (300 DPI)
+        </button>
+
+        <button onclick="triggerFileDownload('3_Video_FPV_and_Reels')" class="dl-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
+          Download 4K FPV Drone Reel (MP4)
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Photo Gallery -->
+  <main class="gallery-container">
+    <div class="gallery-header">
+      <div style="font-family: 'Cinzel', serif; font-size: 19px; font-weight: 700;">Property Media Gallery</div>
+      <div class="gallery-count" id="portalGalleryCount">Awaiting Search</div>
+    </div>
+
+    <!-- Client Property Lookup Bar -->
+    <div style="background: linear-gradient(135deg, rgba(212, 175, 55, 0.1), rgba(20, 22, 28, 0.9)); border: 1px solid rgba(212, 175, 55, 0.35); border-radius: 12px; padding: 14px 18px; margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;">
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 20px;">🔍</span>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: #fff;">Find Your Property Gallery</div>
+          <div style="font-size: 11.5px; color: var(--text-muted);">Enter your property street address or realtor email to load your proofs <span ondblclick="promptAdminToolkitAccess()">&amp;</span> invoice</div>
+        </div>
+      </div>
+      <div style="display: flex; gap: 8px; flex: 1; max-width: 440px;">
+        <input type="text" id="portalLookupInput" class="form-input-note" placeholder="e.g. 1450 Ocean Breeze Way or sarah@compass.com" style="font-size: 12.5px; padding: 9px 12px;" onkeydown="if(event.key==='Enter'){event.preventDefault();lookupClientPropertyGallery();}">
+        <button type="button" id="portalLookupBtn" class="dl-btn primary" onclick="lookupClientPropertyGallery()" style="margin: 0; white-space: nowrap; padding: 9px 16px;">
+          Load My Gallery
+        </button>
+      </div>
+    </div>
+
+    <div class="gallery-grid" id="portalGalleryGrid" oncontextmenu="return false;" ondragstart="return false;">
+      <div id="portalEmptyPrompt" style="grid-column: 1 / -1; padding: 56px 24px; text-align: center; background: rgba(18, 22, 34, 0.65); border: 1px dashed rgba(212, 175, 55, 0.35); border-radius: 12px; margin: 10px 0;">
+        <div style="font-size: 40px; margin-bottom: 12px;">🔍</div>
+        <h2 style="font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold-primary); margin-bottom: 8px;">Find Your Property Media Suite</h2>
+        <p style="font-size: 13.5px; color: var(--text-muted); max-width: 520px; margin: 0 auto 16px; line-height: 1.6;">
+          Enter your listing street address or realtor email in the search bar above to load your watermarked proofs, order post-production enhancements, and unlock full-resolution MLS media.
+        </p>
+        <div style="display: inline-flex; align-items: center; gap: 8px; font-size: 12px; color: rgba(212, 175, 55, 0.9); background: rgba(212, 175, 55, 0.08); padding: 7px 16px; border-radius: 20px; border: 1px solid rgba(212, 175, 55, 0.25);">
+          <span>💡 Quick Search:</span> Type your street name and click <strong>Load My Gallery</strong>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Checkout / Zelle Pay Modal -->
+  <div id="paymentModal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 580px;">
+      <button onclick="closePaymentModal()" class="modal-close">&times;</button>
+      <div class="modal-title" id="paymentModalTitle">⚡ Pay with Zelle • Zero Processing Fees</div>
+      <p style="font-size: 13px; color: var(--text-muted);" id="modalPropSubtitle">
+        Selected Property
+      </p>
+
+      <div class="invoice-line-items" id="invoiceLineItems">
+        <div class="line-item">
+          <span>Standard HDR Media</span>
+          <span id="modalBaseAmount">$0.00</span>
+        </div>
+        <!-- Dynamic Add-ons injected here -->
+        <div class="line-item total">
+          <span>Total Balance Due</span>
+          <span id="modalTotalDue">$0.00</span>
+        </div>
+      </div>
+
+      <!-- Dual Responsive Mobile vs. Desktop Zelle Checkout Card -->
+      <div class="zelle-checkout-card">
+        <div class="zelle-checkout-grid">
+          <div class="zelle-copy-stack">
+            <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard('jembid1979@gmail.com', this, '📋 Copied Zelle Recipient: jembid1979@gmail.com')">
+              <div>
+                <div style="font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">1. Copy Zelle Recipient (Jorge Embid)</div>
+                <div style="font-family: 'Montserrat', monospace; font-size: 13.5px; color: var(--gold-light); margin-top: 2px;">jembid1979@gmail.com</div>
+              </div>
+              <span class="copy-pill">Copy Recipient</span>
+            </button>
+
+            <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard(document.getElementById('modalZelleRawTotal').innerText, this, '📋 Copied Exact Total!')">
+              <div>
+                <div style="font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">2. Copy Exact Total (<span id="modalZelleTotalLabel">$0.00</span>)</div>
+                <div style="font-family: 'Montserrat', monospace; font-size: 13.5px; color: #6ee7b7; margin-top: 2px;">$<span id="modalZelleRawTotal">0</span></div>
+              </div>
+              <span class="copy-pill">Copy Total</span>
+            </button>
+
+            <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard(document.getElementById('modalZelleMemo').innerText, this, '📋 Copied Memo Code!')">
+              <div>
+                <div style="font-size: 11.5px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px;">3. Copy Memo Code</div>
+                <div id="modalZelleMemo" style="font-family: 'Montserrat', monospace; font-size: 13.5px; color: #fcd34d; margin-top: 2px;">GIP-0000-100</div>
+              </div>
+              <span class="copy-pill">Copy Memo</span>
+            </button>
+          </div>
+
+          <div class="zelle-qr-column">
+            <img id="modalZelleQrImg" loading="lazy" decoding="async" src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=Zelle%3Ajembid1979%40gmail.com" alt="Scan Zelle QR Code">
+            <div class="zelle-qr-caption">Scan with Bank App<br><span style="font-weight: 500; color: #475569;">jembid1979@gmail.com</span></div>
+          </div>
+        </div>
+        <div class="zelle-email-note">
+          ✉️ <em>We have also emailed these payment details to you so you can easily switch to your banking app.</em>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+        <div>
+          <label style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Your Sender Name *</label>
+          <input type="text" id="zelleSenderInput" class="form-input-note" placeholder="e.g. Sarah Jenkins" style="width: 100%; margin-top: 4px;">
+        </div>
+        <div>
+          <label style="font-size: 11px; color: var(--text-muted); font-weight: 700;">Zelle Memo / Conf #</label>
+          <input type="text" id="zelleRefInput" class="form-input-note" placeholder="e.g. GIP-4821-201" style="width: 100%; margin-top: 4px;">
+        </div>
+      </div>
+
+      <button onclick="handlePortalPaymentCheckout()" class="pay-btn" id="modalPayBtn" style="width: 100%; justify-content: center; padding: 15px; font-size: 14.5px;">
+        ✓ I've Sent Zelle • Submit for Verification
+      </button>
+
+      <div style="text-align: center; margin-top: 14px; font-size: 11.5px; color: var(--text-muted);">
+        🔒 Direct Bank-to-Bank Zelle Transfer • Zero Processing Fees • Automated Drive Unlock
+      </div>
+    </div>
+  </div>
+
+  <!-- Photographer Toolkit Admin PIN Modal (Immune to iframe sandbox restrictions) -->
+  <div id="adminPinModal" class="modal-overlay" style="z-index: 10001;">
+    <div class="modal-card" style="max-width: 420px; text-align: center; border-color: var(--gold-primary); box-shadow: 0 20px 60px rgba(0,0,0,0.9);">
+      <div style="font-size: 38px; margin-bottom: 8px;">🔒</div>
+      <h3 style="font-family: 'Cinzel', serif; font-size: 20px; color: var(--gold-primary); margin-bottom: 6px;">Photographer Toolkit Login</h3>
+      <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.5;">
+        Enter your photographer PIN or key to access client links, Google Sheets ledger, and portal controls.
+      </p>
+      <form onsubmit="event.preventDefault(); submitAdminPin();">
+        <div style="margin-bottom: 16px;">
+          <input type="password" id="adminPinInput" class="form-input-note" placeholder="Enter Photographer Admin PIN" style="font-size: 15px; text-align: center; letter-spacing: 2px; padding: 12px;" autocomplete="current-password">
+        </div>
+        <div id="adminPinError" style="display: none; font-size: 12px; color: #fca5a5; margin-bottom: 14px; background: rgba(239, 68, 68, 0.1); padding: 8px; border-radius: 6px; border: 1px solid rgba(239, 68, 68, 0.3);"></div>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="dl-btn" style="flex: 1;" onclick="closeAdminPinModal()">Cancel</button>
+          <button type="submit" id="adminPinSubmitBtn" class="dl-btn primary" style="flex: 1.5; margin: 0; background: linear-gradient(135deg, #d4af37, #b8860b);">Unlock Toolkit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Photographer Toolkit Modal (Client Gallery Delivery Link Generator) -->
+  <div id="linkGenModal" class="modal-overlay">
+    <div class="modal-card" style="max-width: 620px;">
+      <button class="modal-close" onclick="closeLinkGenModal()">&times;</button>
+      <div class="modal-title">🛠️ Photographer Toolkit • Notify Client & Paywall Setup</div>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px; line-line-height: 1.4;">
+        Generate an instant client preview link or send a 1-click notification email. Your Google Drive folder stays <strong>🔒 PRIVATE</strong> until the invoice is paid.
+      </p>
+
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Property Address</label>
+          <input type="text" id="genAddress" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="e.g. 1450 Ocean Breeze Way, Boca Raton, FL" value="" oninput="updateGeneratedLink()">
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Client / Realtor Name</label>
+            <input type="text" id="genClient" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="e.g. Sarah Jenkins" value="" oninput="updateGeneratedLink()">
+          </div>
+          <div>
+            <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Client Email</label>
+            <input type="email" id="genEmail" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="realtor@compass.com">
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+          <div>
+            <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Brokerage</label>
+            <input type="text" id="genBrokerage" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="e.g. Compass Real Estate" value="" oninput="updateGeneratedLink()">
+          </div>
+          <div>
+            <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Invoice Balance ($)</label>
+            <input type="number" id="genPrice" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="e.g. 345" value="" oninput="updateGeneratedLink()">
+          </div>
+        </div>
+        <div>
+          <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Google Drive Link (Kept Private Until Paid)</label>
+          <input type="text" id="genDrive" class="form-input-note" style="width: 100%; margin-top: 4px;" placeholder="https://drive.google.com/..." oninput="updateGeneratedLink()">
+        </div>
+      </div>
+
+      <div style="margin-top: 16px;">
+        <label style="font-size: 11px; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">Client Preview & Paywall URL (Drive Hidden):</label>
+        <div style="display: flex; gap: 8px; margin-top: 4px;">
+          <input type="text" id="genResultUrl" class="form-input-note" readonly style="color: var(--gold-primary); font-family: monospace; font-size: 11.5px; flex: 1;">
+          <button type="button" class="dl-btn primary" onclick="copyGeneratedLink()" style="margin: 0; white-space: nowrap;">
+            📋 Copy Link
+          </button>
+        </div>
+      </div>
+
+      <div style="margin-top: 16px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <button type="button" id="sendReadyEmailBtn" class="dl-btn primary" onclick="sendReadyEmailToClient()" style="flex: 1.5; justify-content: center; margin: 0;">
+          📧 Send "Photos Ready" Email
+        </button>
+        <button type="button" class="dl-btn" onclick="copyEmailTemplate()" style="flex: 1; justify-content: center; margin: 0;">
+          ✉️ Copy Email Text
+        </button>
+        <button type="button" class="dl-btn" onclick="previewGeneratedLink()" style="flex: 1; justify-content: center; border-color: var(--gold-primary); color: var(--gold-primary); margin: 0;">
+          👁️ Preview Gallery
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    <span id="toastMessage">File preparation complete.</span>
+  </div>
+
+  <script>
+    // Universal Iframe-Safe "Copy to Clipboard" Utility (Fixes iOS Safari / Chrome Permission Block in Google Sites)
+    function copyToClipboard(text, btnEl, successMsg) {
+      let copied = false;
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = String(text || '');
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, 99999);
+        copied = document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (e) {
+        console.warn('Fallback copy error:', e);
+      }
+
+      if (btnEl) {
+        const pill = btnEl.querySelector('.copy-pill');
+        if (pill) {
+          if (!btnEl.dataset.origPill) btnEl.dataset.origPill = pill.innerText;
+          btnEl.classList.add('copied-state');
+          pill.innerText = '✓ Copied!';
+          setTimeout(() => {
+            btnEl.classList.remove('copied-state');
+            pill.innerText = btnEl.dataset.origPill || 'Copy';
+          }, 2000);
+        } else {
+          if (!btnEl.dataset.origHtml) btnEl.dataset.origHtml = btnEl.innerHTML;
+          btnEl.classList.add('copied-state');
+          btnEl.innerText = '✓ Copied!';
+          setTimeout(() => {
+            btnEl.classList.remove('copied-state');
+            btnEl.innerHTML = btnEl.dataset.origHtml;
+          }, 2000);
+        }
+      }
+
+      if (successMsg) showToast(successMsg);
+      return copied;
+    }
+
+    function copyTextToClipboard(text, successMsg, btnEl) {
+      return copyToClipboard(text, btnEl || null, successMsg);
+    }
+
+    // Auto-Generated Booking Reference / Memo Code: GIP-[4-Digit-Random]-[StreetNumber]
+    function generateMemoCode(propertyAddress) {
+      const addrStr = String(propertyAddress || '').trim();
+      const streetMatch = addrStr.match(/\b(\d{1,6})\b/);
+      const streetNum = streetMatch ? streetMatch[1] : '100';
+      const rand4 = Math.floor(1000 + Math.random() * 9000);
+      return `GIP-${rand4}-${streetNum}`;
+    }
+
+    const CONFIG = {
+      googleCalendarScriptUrl: "https://script.google.com/macros/s/AKfycbwqf-M6hc5f3PnxW9rwx2tz7nu9cSObqrE0ZhNgV5QjXw3bSL-FXnJQcqTc4Wck8ptF5w/exec",
+      zelleEmail: "jembid1979@gmail.com",
+      zelleRecipientName: "Jorge Embid",
+      googleDriveFolderUrl: ""
+    };
+
+    // Upsell state
+    const portalUpsellState = {
+      basePrice: 0,
+      activeAddons: {},
+      isUnlocked: false,
+      clientName: "",
+      clientEmail: "",
+      brokerage: ""
+    };
+
+    // Admin Toolkit PIN Auth Modal Handlers (iframe-safe)
+    function promptAdminToolkitAccess() {
+      const pinModal = document.getElementById('adminPinModal');
+      const pinInput = document.getElementById('adminPinInput');
+      const pinErr = document.getElementById('adminPinError');
+      if (pinModal && pinInput) {
+        if (pinErr) pinErr.style.display = 'none';
+        pinInput.value = '';
+        pinModal.classList.add('active');
+        setTimeout(() => pinInput.focus(), 100);
+        return;
+      }
+      fallbackPromptAdminKey();
+    }
+
+    function closeAdminPinModal() {
+      const pinModal = document.getElementById('adminPinModal');
+      if (pinModal) pinModal.classList.remove('active');
+    }
+
+    async function submitAdminPin() {
+      const pinInput = document.getElementById('adminPinInput');
+      const pinErr = document.getElementById('adminPinError');
+      const btn = document.getElementById('adminPinSubmitBtn');
+      const pin = (pinInput ? pinInput.value : '').trim();
+      if (!pin) {
+        if (pinErr) { pinErr.innerText = 'Please enter your photographer PIN.'; pinErr.style.display = 'block'; }
+        return;
+      }
+
+      if (btn) { btn.disabled = true; btn.innerText = 'Verifying...'; }
+      try {
+        const res = await fetch(`${CONFIG.googleCalendarScriptUrl}?action=verify_admin&adminKey=${encodeURIComponent(pin)}`);
+        const data = await res.json();
+        if (data && data.status === 'success') {
+          window.__adminKey = pin;
+          closeAdminPinModal();
+          const tkBtn = document.getElementById('adminToolkitBtn');
+          if (tkBtn) tkBtn.style.display = 'inline-flex';
+          openLinkGenModal();
+          showToast('🔓 Photographer Toolkit Unlocked');
+          return;
+        } else {
+          if (pinErr) { pinErr.innerText = 'Incorrect PIN or Access Key.'; pinErr.style.display = 'block'; }
+        }
+      } catch (err) {
+        if (pinErr) { pinErr.innerText = 'Connection error. Check PIN and try again.'; pinErr.style.display = 'block'; }
+      } finally {
+        if (btn) { btn.disabled = false; btn.innerText = 'Unlock Toolkit'; }
+      }
+    }
+
+    async function fallbackPromptAdminKey() {
+      try {
+        const key = window.prompt("Enter Photographer Admin PIN:");
+        if (!key) return;
+        const cleanKey = key.trim();
+        showToast('⏳ Verifying admin PIN...');
+        const res = await fetch(`${CONFIG.googleCalendarScriptUrl}?action=verify_admin&adminKey=${encodeURIComponent(cleanKey)}`);
+        const data = await res.json();
+        if (data && data.status === 'success') {
+          window.__adminKey = cleanKey;
+          const tkBtn = document.getElementById('adminToolkitBtn');
+          if (tkBtn) tkBtn.style.display = 'inline-flex';
+          openLinkGenModal();
+          showToast('🔓 Photographer Toolkit Unlocked');
+        } else {
+          showToast('⚠️ Incorrect Admin PIN.');
+        }
+      } catch (e) {
+        showToast('⚠️ Verification error. Please try again.');
+      }
+    }
+
+    function toggleGlobalUpsell(key, price, name) {
+      const card = document.getElementById('cardUpsell-' + key);
+      const isAlreadyActive = card && card.classList.contains('active');
+
+      if (isAlreadyActive) {
+        delete portalUpsellState.activeAddons['global-' + key];
+        if (card) {
+          card.classList.remove('active');
+          const btn = card.querySelector('.upsell-btn');
+          if (btn) btn.innerText = '+ Add';
+        }
+      } else {
+        portalUpsellState.activeAddons['global-' + key] = {
+          price: price,
+          name: name + ' (General)'
+        };
+        if (card) {
+          card.classList.add('active');
+          const btn = card.querySelector('.upsell-btn');
+          if (btn) btn.innerText = '✓ Added';
+        }
+      }
+
+      recalculatePortalTotal();
+    }
+
+    function togglePhotoAddon(photoId, addonKey, price, addonName, photoTitle) {
+      const chipKey = `photo-${photoId}-${addonKey}`;
+      const chipBtn = document.getElementById(`chip-${photoId}-${addonKey}`);
+      const box = document.getElementById(`cardBox-${photoId}`);
+
+      if (portalUpsellState.activeAddons[chipKey]) {
+        delete portalUpsellState.activeAddons[chipKey];
+        if (chipBtn) chipBtn.classList.remove('active');
+      } else {
+        portalUpsellState.activeAddons[chipKey] = {
+          price: price,
+          name: `${addonName} [${photoTitle}]`
+        };
+        if (chipBtn) chipBtn.classList.add('active');
+      }
+
+      // Check if this box still has any active chips
+      if (box) {
+        const hasActive = box.querySelectorAll('.chip-btn.active').length > 0;
+        box.classList.toggle('has-enhancement', hasActive);
+      }
+
+      recalculatePortalTotal();
+    }
+
+    function recalculatePortalTotal() {
+      let addonSum = 0;
+      let addonCount = 0;
+      for (const k in portalUpsellState.activeAddons) {
+        addonSum += portalUpsellState.activeAddons[k].price;
+        addonCount++;
+      }
+
+      const currentTotal = portalUpsellState.basePrice + addonSum;
+
+      // Update badge
+      const badge = document.getElementById('upsellAddedBadge');
+      const countEl = document.getElementById('upsellCount');
+      const totalEl = document.getElementById('upsellTotal');
+      const notesBox = document.getElementById('upsellNotesBox');
+
+      if (addonCount > 0) {
+        if (badge) badge.style.display = 'inline-block';
+        if (countEl) countEl.innerText = addonCount;
+        if (totalEl) totalEl.innerText = addonSum;
+        if (notesBox) notesBox.style.display = 'block';
+      } else {
+        if (badge) badge.style.display = 'none';
+        if (notesBox) notesBox.style.display = 'none';
+      }
+
+      // Update price display in banner
+      const priceDisplay = document.getElementById('portalPriceDisplay');
+      if (priceDisplay) priceDisplay.innerText = '$' + currentTotal + '.00';
+
+      // Update main Pay button
+      const payBtn = document.getElementById('payNowBtn');
+      if (payBtn) {
+        if (addonCount > 0) {
+          payBtn.innerHTML = `Pay $${currentTotal} & Unlock <span style="font-size: 11px; opacity: 0.85; margin-left: 4px;">(+${addonCount} Add-on${addonCount > 1 ? 's' : ''})</span> <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        } else {
+          payBtn.innerHTML = `Pay $${currentTotal} & Unlock <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>`;
+        }
+      }
+
+      // Update modal Total & Button
+      const modalTotalDue = document.getElementById('modalTotalDue');
+      if (modalTotalDue) modalTotalDue.innerText = '$' + currentTotal + '.00';
+
+      const rawTotalEl = document.getElementById('modalZelleRawTotal');
+      if (rawTotalEl) rawTotalEl.innerText = String(currentTotal);
+
+      const totalLblEl = document.getElementById('modalZelleTotalLabel');
+      if (totalLblEl) totalLblEl.innerText = '$' + currentTotal;
+
+      const modalPayBtn = document.getElementById('modalPayBtn');
+      if (modalPayBtn) modalPayBtn.innerText = `✓ I've Sent Zelle ($${currentTotal}) • Submit for Verification`;
+
+      // Update modal Line Items
+      renderModalLineItems(currentTotal);
+    }
+
+    function renderModalLineItems(total) {
+      const container = document.getElementById('invoiceLineItems');
+      if (!container) return;
+
+      let html = `
+        <div class="line-item">
+          <span>Base Listing Media Suite</span>
+          <span>$${portalUpsellState.basePrice}.00</span>
+        </div>
+      `;
+
+      for (const k in portalUpsellState.activeAddons) {
+        const item = portalUpsellState.activeAddons[k];
+        html += `
+          <div class="line-item" style="color: var(--gold-light);">
+            <span>✨ ${item.name}</span>
+            <span>+$${item.price}.00</span>
+          </div>
+        `;
+      }
+
+      html += `
+        <div class="line-item total">
+          <span>Total Balance Due</span>
+          <span id="modalTotalDue">$${total}.00</span>
+        </div>
+      `;
+
+      container.innerHTML = html;
+    }
+
+    function openPaymentModal() {
+      const propTitle = (document.getElementById('portalAddressTitle')?.innerText || '').trim() || "Selected Property";
+      let addonSum = 0;
+      for (const k in portalUpsellState.activeAddons) {
+        addonSum += portalUpsellState.activeAddons[k].price;
+      }
+      const finalTotal = portalUpsellState.basePrice + addonSum;
+      const memoCode = generateMemoCode(propTitle);
+
+      const memoEl = document.getElementById('modalZelleMemo');
+      if (memoEl) memoEl.innerText = memoCode;
+
+      const refInput = document.getElementById('zelleRefInput');
+      if (refInput && !refInput.value) refInput.value = memoCode;
+
+      const senderInput = document.getElementById('zelleSenderInput');
+      if (senderInput && !senderInput.value && portalUpsellState.clientName) {
+        senderInput.value = portalUpsellState.clientName;
+      }
+
+      const rawTotalEl = document.getElementById('modalZelleRawTotal');
+      if (rawTotalEl) rawTotalEl.innerText = String(finalTotal);
+
+      const totalLblEl = document.getElementById('modalZelleTotalLabel');
+      if (totalLblEl) totalLblEl.innerText = '$' + finalTotal;
+
+      const qrImg = document.getElementById('modalZelleQrImg');
+      if (qrImg) {
+        const qrData = encodeURIComponent(`Zelle:${CONFIG.zelleEmail}|Amount:${finalTotal}|Memo:${memoCode}`);
+        qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=${qrData}`;
+      }
+
+      document.getElementById('paymentModal').style.display = 'flex';
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').style.display = 'none';
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastMessage').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3500);
+    }
+
+    function triggerFileDownload(folderName) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const driveUrl = urlParams.get('drive') || CONFIG.googleDriveFolderUrl;
+
+      if (driveUrl && driveUrl.startsWith('http')) {
+        showToast(`Opening Google Drive: ${folderName}...`);
+        window.open(driveUrl, '_blank');
+      } else {
+        showToast(`Preparing download for ${folderName}...`);
+      }
+    }
+
+    async function handlePortalPaymentCheckout() {
+      const senderInput = document.getElementById('zelleSenderInput');
+      const senderName = (senderInput ? senderInput.value : '').trim();
+      const refInput = document.getElementById('zelleRefInput');
+      const memoFallback = document.getElementById('modalZelleMemo')?.innerText || 'Zelle Direct Transfer';
+      const refCode = (refInput ? refInput.value : '').trim() || memoFallback;
+
+      if (!senderName) {
+        alert('Please enter your Sender Name so we can match your Zelle payment to your invoice.');
+        if (senderInput) senderInput.focus();
+        return;
+      }
+
+      const payBtn = document.getElementById('modalPayBtn');
+      const originalText = payBtn ? payBtn.innerHTML : "";
+
+      const propTitle = (document.getElementById('portalAddressTitle')?.innerText || '').trim() || "Selected Property";
+      let addonSum = 0;
+      const addonNames = [];
+      for (const k in portalUpsellState.activeAddons) {
+        addonSum += portalUpsellState.activeAddons[k].price;
+        addonNames.push(portalUpsellState.activeAddons[k].name);
+      }
+      const finalTotal = portalUpsellState.basePrice + addonSum;
+      const notesVal = document.getElementById('upsellNotesInput')?.value || "";
+      const packageDesc = addonNames.length > 0
+        ? `Media Suite + Add-ons: ${addonNames.join(', ')}`
+        : `Full-Res & MLS-Ready Media Suite Unlock`;
+
+      if (payBtn) {
+        payBtn.disabled = true;
+        payBtn.innerHTML = `⏳ Submitting Zelle Verification ($${finalTotal})...`;
+      }
+
+      const zellePayload = {
+        action: "submit_zelle_payment",
+        propertyAddress: propTitle,
+        clientName: senderName,
+        clientEmail: portalUpsellState.clientEmail || "",
+        brokerage: portalUpsellState.brokerage || "MLS Listing",
+        shootDate: new Date().toISOString().split('T')[0],
+        amountPaid: finalTotal,
+        paymentType: "Zelle Transfer (Pending Verification)",
+        zelleSender: senderName,
+        zelleReference: refCode,
+        packageDetails: packageDesc,
+        upsells: addonNames,
+        upsellNotes: notesVal
+      };
+
+      if (CONFIG.googleCalendarScriptUrl && CONFIG.googleCalendarScriptUrl.startsWith("http")) {
+        try {
+          await fetch(CONFIG.googleCalendarScriptUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(zellePayload)
+          });
+        } catch (err) {
+          try {
+            const submitUrl = `${CONFIG.googleCalendarScriptUrl}?action=submit_zelle_payment&data=${encodeURIComponent(JSON.stringify(zellePayload))}`;
+            await fetch(submitUrl);
+          } catch (gErr) {
+            console.warn('Zelle submission sync note:', gErr);
+          }
+        }
+      }
+
+      if (payBtn) {
+        payBtn.disabled = false;
+        payBtn.innerHTML = originalText;
+      }
+      closePaymentModal();
+      trackGAEvent('zelle_payment_submitted', {
+        currency: 'USD',
+        value: finalTotal,
+        property_address: propTitle
+      });
+      showToast(`⏳ Zelle payment ($${finalTotal}) submitted! Your gallery will unlock automatically once Jorge verifies receipt.`);
+    }
+
+    // Only invoked after the SERVER reports the gallery as paid (see lookupClientPropertyGallery).
+    function simulateSuccessfulPayment() {
+      closePaymentModal();
+
+      let addonSum = 0;
+      const addonNames = [];
+      for (const k in portalUpsellState.activeAddons) {
+        addonSum += portalUpsellState.activeAddons[k].price;
+        addonNames.push(portalUpsellState.activeAddons[k].name);
+      }
+      const finalTotal = portalUpsellState.basePrice + addonSum;
+
+      // Update badge
+      const badge = document.getElementById('statusBadge');
+      badge.className = 'badge-status status-unlocked';
+      badge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Paid & Unlocked';
+
+      // Hide paywall banner & upsells, show downloads bar
+      document.getElementById('paywallBanner').style.display = 'none';
+      const upsellPanel = document.getElementById('portalUpsellPanel');
+      if (upsellPanel) upsellPanel.style.display = 'none';
+      document.getElementById('downloadsBar').style.display = 'block';
+
+      // Remove watermarks
+      portalUpsellState.isUnlocked = true;
+      document.querySelectorAll('.watermark-overlay').forEach(el => {
+        el.classList.add('unlocked');
+      });
+      applyGalleryCanvasProtection();
+
+      const successToast = addonNames.length > 0
+        ? `🎉 Invoice Settled ($${finalTotal})! ${addonNames.length} add-on(s) ordered & downloads unlocked.`
+        : '🎉 Invoice Settled! Watermarks removed & Google Drive downloads unlocked.';
+      showToast(successToast);
+    }
+
+    function renderWatermarkedCanvas(cardEl, imgSrc, isUnlocked) {
+      if (!cardEl || !imgSrc) return;
+      let canvas = cardEl.querySelector('canvas.proof-canvas');
+      if (!canvas) {
+        canvas = document.createElement('canvas');
+        canvas.className = 'proof-canvas';
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.objectFit = 'cover';
+        canvas.style.display = 'block';
+        canvas.style.pointerEvents = 'none';
+        cardEl.insertBefore(canvas, cardEl.firstChild);
+      }
+      const sourceImg = cardEl.querySelector('img.proof-source-img');
+      if (sourceImg) sourceImg.style.display = 'none';
+
+      const img = new Image();
+      if (!imgSrc.startsWith('data:')) img.crossOrigin = 'anonymous';
+      img.onload = function() {
+        const maxW = 600;
+        const scale = Math.min(1, maxW / (img.width || 600));
+        const w = Math.round((img.width || 600) * scale);
+        const h = Math.round((img.height || 375) * scale);
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0, w, h);
+
+        if (!isUnlocked) {
+          ctx.save();
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+          ctx.lineWidth = 1.5;
+          for (let i = -h; i < w + h; i += 48) {
+            ctx.beginPath();
+            ctx.moveTo(i, 0);
+            ctx.lineTo(i - h, h);
+            ctx.stroke();
+          }
+          ctx.restore();
+
+          ctx.save();
+          ctx.translate(w / 2, h / 2);
+          ctx.rotate(-22 * Math.PI / 180);
+          ctx.textAlign = 'center';
+          ctx.font = 'bold 14px Cinzel, Georgia, serif';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.32)';
+          for (let y = -h; y <= h; y += 70) {
+            for (let x = -w; x <= w; x += 260) {
+              ctx.fillText('GILDED IRIS • UNPAID PROOF', x, y);
+            }
+          }
+          ctx.fillStyle = 'rgba(0, 0, 0, 0.58)';
+          ctx.fillRect(-155, -24, 310, 48);
+          ctx.strokeStyle = 'rgba(212, 175, 55, 0.85)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(-155, -24, 310, 48);
+          ctx.font = 'bold 15px Cinzel, Georgia, serif';
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+          ctx.fillText('GILDED IRIS • PROOF ONLY', 0, -2);
+          ctx.font = '600 10px Montserrat, sans-serif';
+          ctx.fillStyle = '#d4af37';
+          ctx.fillText('SETTLE INVOICE TO UNLOCK HIGH-RES', 0, 14);
+          ctx.restore();
+        }
+      };
+      img.onerror = function() {
+        if (sourceImg) sourceImg.style.display = 'block';
+      };
+      img.src = imgSrc;
+    }
+
+    function applyGalleryCanvasProtection() {
+      const cards = document.querySelectorAll('#portalGalleryGrid .photo-card');
+      cards.forEach(card => {
+        const img = card.querySelector('img.proof-source-img');
+        const src = card.getAttribute('data-proof-src') || (img ? img.getAttribute('src') : '');
+        if (src) {
+          card.setAttribute('data-proof-src', src);
+          renderWatermarkedCanvas(card, src, !!portalUpsellState.isUnlocked);
+        }
+      });
+    }
+
+    function renderDynamicProofGallery(proofs) {
+      const grid = document.getElementById('portalGalleryGrid');
+      if (!grid || !Array.isArray(proofs) || proofs.length === 0) return;
+
+      grid.innerHTML = '';
+      proofs.forEach((p, idx) => {
+        const photoNum = idx + 1;
+        const rawTitle = p.title || p.name || `Photo ${photoNum}`;
+        const cleanLabel = rawTitle.replace(/\.[^/.]+$/, '').replace(/[_-]+/g, ' ');
+        const safeLabel = cleanLabel.replace(/'/g, "\\'");
+        const imgUri = p.proofDataUri || p.dataUri || '';
+        if (!imgUri) return;
+
+        const cardBox = document.createElement('div');
+        cardBox.className = 'portal-card-box';
+        cardBox.id = `cardBox-${photoNum}`;
+        cardBox.innerHTML = `
+          <div class="photo-card" data-proof-src="${imgUri}">
+            <img class="proof-source-img" loading="lazy" decoding="async" src="${imgUri}" alt="${cleanLabel}" style="display:none;">
+            <div class="watermark-overlay ${portalUpsellState.isUnlocked ? 'unlocked' : ''}">
+              <div class="watermark-text">Gilded Iris Preview • Unpaid</div>
+            </div>
+          </div>
+          <div class="portal-card-footer">
+            <div class="photo-label">
+              <span>${cleanLabel}</span>
+            </div>
+            <div class="photo-chips">
+              <button type="button" class="chip-btn" id="chip-${photoNum}-staging" onclick="togglePhotoAddon(${photoNum}, 'staging', 20, 'Virtual Staging', '${safeLabel}')">🛋️ Virtual Stage +$20</button>
+              <button type="button" class="chip-btn" id="chip-${photoNum}-twilight" onclick="togglePhotoAddon(${photoNum}, 'twilight', 25, 'Sunset Twilight', '${safeLabel}')">🌅 Twilight +$25</button>
+              <button type="button" class="chip-btn" id="chip-${photoNum}-removal" onclick="togglePhotoAddon(${photoNum}, 'removal', 15, 'Object Removal', '${safeLabel}')">🪄 Clean +$15</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(cardBox);
+      });
+
+      applyGalleryCanvasProtection();
+    }
+
+    async function lookupClientPropertyGallery(explicitQuery, forceUnpaidPreview) {
+      const inputEl = document.getElementById('portalLookupInput');
+      const btnEl = document.getElementById('portalLookupBtn');
+      const query = (explicitQuery !== undefined ? explicitQuery : (inputEl ? inputEl.value : '')).trim();
+      if (!query) {
+        showToast('Please enter your property address or email.');
+        return;
+      }
+      if (query.toLowerCase() === '#admin' || query.toLowerCase() === '#jorge' || query.toLowerCase() === '#photographer') {
+        if (inputEl) inputEl.value = '';
+        promptAdminToolkitAccess();
+        return;
+      }
+      if (btnEl) {
+        btnEl.disabled = true;
+        btnEl.innerText = '⏳ Loading...';
+      }
+      try {
+        const res = await fetch(`${CONFIG.googleCalendarScriptUrl}?action=lookup_gallery&query=${encodeURIComponent(query)}`);
+        const data = await res.json();
+        if (data && data.status === 'success') {
+          const g = data.gallery || data;
+          const propAddr = g.propertyAddress || query;
+          document.getElementById('portalAddressTitle').innerText = propAddr;
+          if (document.getElementById('modalPropSubtitle')) {
+            document.getElementById('modalPropSubtitle').innerText = propAddr;
+          }
+          if (g.clientName) {
+            document.getElementById('portalClientTag').innerText = `👤 Client: ${g.clientName} (${g.brokerage || 'MLS'})`;
+            portalUpsellState.clientName = g.clientName;
+          }
+          if (g.brokerage) portalUpsellState.brokerage = g.brokerage;
+          if (g.price && !isNaN(parseFloat(g.price))) {
+            portalUpsellState.basePrice = parseFloat(g.price);
+            recalculatePortalTotal();
+          }
+          const photos = g.photos || g.proofs || [];
+          const isPaidState = forceUnpaidPreview ? false : !!g.isPaid;
+          portalUpsellState.isUnlocked = isPaidState;
+          if (g.folderUrl) CONFIG.googleDriveFolderUrl = g.folderUrl;
+
+          // Update Status Badge
+          const statusBadge = document.getElementById('statusBadge');
+          if (statusBadge) {
+            statusBadge.style.display = 'inline-flex';
+            if (isPaidState) {
+              statusBadge.className = 'badge-status status-unlocked';
+              statusBadge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg> Invoice Settled (Media Unlocked)';
+            } else {
+              statusBadge.className = 'badge-status status-locked';
+              statusBadge.innerHTML = '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Payment Pending (Watermarked)';
+            }
+          }
+
+          // Toggle Paywall and Downloads
+          const paywall = document.getElementById('paywallBanner');
+          const dlBar = document.getElementById('downloadsBar');
+          if (paywall) paywall.style.display = isPaidState ? 'none' : 'flex';
+          if (dlBar) dlBar.style.display = isPaidState ? 'block' : 'none';
+
+          // Show Upsell Panel
+          const upsellPanel = document.getElementById('portalUpsellPanel');
+          if (upsellPanel) upsellPanel.style.display = 'block';
+
+          // Render photos or keep prompt
+          const countEl = document.getElementById('portalGalleryCount');
+          if (photos.length > 0) {
+            if (countEl) countEl.innerText = `${photos.length} High-Resolution Proof Assets`;
+            renderDynamicProofGallery(photos);
+          } else {
+            if (countEl) countEl.innerText = '0 Photos Ready';
+            const grid = document.getElementById('portalGalleryGrid');
+            if (grid) {
+              grid.innerHTML = `
+                <div style="grid-column: 1 / -1; padding: 48px 20px; text-align: center; background: rgba(18, 22, 34, 0.6); border: 1px dashed rgba(212, 175, 55, 0.3); border-radius: 12px;">
+                  <div style="font-size: 32px; margin-bottom: 8px;">📷</div>
+                  <h4 style="color: var(--gold-primary); font-family: 'Cinzel', serif; margin-bottom: 6px;">Media In Post-Production</h4>
+                  <p style="color: var(--text-muted); font-size: 13px;">Proofs for <strong>${propAddr}</strong> are currently being edited and will appear here shortly.</p>
+                </div>
+              `;
+            }
+          }
+
+          if (isPaidState) {
+            simulateSuccessfulPayment(true);
+          } else {
+            showToast(`📸 Loaded ${photos.length} watermarked proof photo(s) for ${propAddr}`);
+          }
+        } else {
+          document.getElementById('portalAddressTitle').innerText = query;
+          showToast(data.message || `No active booking found for "${query}"`);
+        }
+      } catch (err) {
+        showToast('Could not connect to server.');
+      } finally {
+        if (btnEl) {
+          btnEl.disabled = false;
+          btnEl.innerText = 'Load My Gallery';
+        }
+      }
+    }
+
+    async function sendReadyEmailToClient() {
+      const addr = document.getElementById('genAddress').value.trim();
+      const client = document.getElementById('genClient').value.trim();
+      const email = document.getElementById('genEmail')?.value.trim() || "";
+      const brokerage = document.getElementById('genBrokerage').value.trim();
+      const price = document.getElementById('genPrice').value.trim();
+      const drive = document.getElementById('genDrive').value.trim();
+      const btn = document.getElementById('sendReadyEmailBtn');
+
+      if (!email || !email.includes('@')) {
+        showToast('⚠️ Please enter a valid Client Email address first.');
+        return;
+      }
+      if (btn) {
+        btn.disabled = true;
+        btn.innerText = '⏳ Sending...';
+      }
+      try {
+        const payload = { propertyAddress: addr, clientName: client, clientEmail: email, brokerage: brokerage, price: parseFloat(price) || 345, folderUrl: drive };
+        const adminKey = window.__adminKey || '';
+        if (!adminKey) { showToast('⚠️ Admin session expired. Please enter PIN again.'); promptAdminPinModal(); return; }
+        const res = await fetch(`${CONFIG.googleCalendarScriptUrl}?action=send_ready_email&adminKey=${encodeURIComponent(adminKey)}&data=${encodeURIComponent(JSON.stringify(payload))}`);
+        const data = await res.json();
+        if (data && data.status === 'success') {
+          showToast(`✅ "Photos Ready" email sent to ${email}!`);
+        } else {
+          showToast(`⚠️ ${data.message || 'Could not send email.'}`);
+        }
+      } catch (e) {
+        showToast('⚠️ Error connecting to email service.');
+      } finally {
+        if (btn) {
+          btn.disabled = false;
+          btn.innerText = '📧 Send "Photos Ready" Email';
+        }
+      }
+    }
+
+    // Photographer Link Generator Toolkit
+    function openLinkGenModal() {
+      const currentAddr = document.getElementById('portalAddressTitle')?.innerText || "";
+      if (currentAddr && !document.getElementById('genAddress').value) {
+        document.getElementById('genAddress').value = currentAddr;
+      }
+      document.getElementById('genPrice').value = portalUpsellState.basePrice;
+      updateGeneratedLink();
+      document.getElementById('linkGenModal').classList.add('active');
+    }
+
+    function closeLinkGenModal() {
+      document.getElementById('linkGenModal').classList.remove('active');
+    }
+
+    function updateGeneratedLink() {
+      const addr = document.getElementById('genAddress').value.trim();
+      const client = document.getElementById('genClient').value.trim();
+      const brokerage = document.getElementById('genBrokerage').value.trim();
+      const price = document.getElementById('genPrice').value.trim();
+
+      let baseUrl = window.location.href.split('?')[0].split('#')[0];
+      try {
+        if (window.parent && window.parent.location && window.parent.location.href) {
+          baseUrl = window.parent.location.href.split('?')[0].split('#')[0];
+        }
+      } catch (e) {}
+
+      // SECURITY: Never include &drive= in unpaid client preview links
+      const params = new URLSearchParams();
+      if (addr) params.set('address', addr);
+      if (client) params.set('client', client);
+      if (brokerage) params.set('brokerage', brokerage);
+      if (price) params.set('price', price);
+
+      const finalUrl = `${baseUrl}?${params.toString()}`;
+      document.getElementById('genResultUrl').value = finalUrl;
+    }
+
+    function copyGeneratedLink() {
+      const urlInput = document.getElementById('genResultUrl');
+      if (urlInput) {
+        copyToClipboard(urlInput.value, null, '✅ Client delivery link copied to clipboard!');
+      }
+    }
+
+    function copyEmailTemplate() {
+      const addr = document.getElementById('genAddress').value.trim();
+      const client = document.getElementById('genClient').value.trim().split(' ')[0] || "there";
+      const link = document.getElementById('genResultUrl').value;
+      const price = document.getElementById('genPrice').value.trim();
+
+      const emailText = 
+`Hi ${client},
+
+Your listing media suite for ${addr} is edited and ready!
+
+You can review your watermarked proofs, select any optional virtual staging/twilight add-ons, and settle your invoice ($${price}) via Zelle (${CONFIG.zelleEmail} - ${CONFIG.zelleRecipientName}) to release instant high-res Google Drive downloads here:
+${link}
+
+Warm regards,
+Jorge | Gilded Iris Photography
+info@gildedirisphotography.com`;
+
+      copyToClipboard(emailText, null, '✅ Realtor email template copied to clipboard!');
+    }
+
+    function previewGeneratedLink() {
+      const addr = document.getElementById('genAddress').value.trim();
+      const client = document.getElementById('genClient').value.trim();
+      const brokerage = document.getElementById('genBrokerage').value.trim();
+      const price = document.getElementById('genPrice').value.trim();
+
+      if (addr) document.getElementById('portalAddressTitle').innerText = addr;
+      if (client || brokerage) {
+        document.getElementById('portalClientTag').innerText = `👤 Client: ${client} (${brokerage})`;
+      }
+      if (price) {
+        portalUpsellState.basePrice = parseFloat(price);
+        recalculatePortalTotal();
+      }
+
+      closeLinkGenModal();
+      if (addr) lookupClientPropertyGallery(addr);
+      else applyGalleryCanvasProtection();
+    }
+
+    function getEffectiveParams() {
+      let searchStr = "";
+      try {
+        if (window.parent && window.parent.location && window.parent.location.search) {
+          searchStr = window.parent.location.search;
+        }
+      } catch (e) {}
+      if (!searchStr) searchStr = window.location.search || "";
+
+      let hashStr = "";
+      try {
+        if (window.parent && window.parent.location && window.parent.location.hash) {
+          hashStr = window.parent.location.hash.substring(1);
+        }
+      } catch (e) {}
+      if (!hashStr && window.location.hash) hashStr = window.location.hash.substring(1);
+
+      const params = new URLSearchParams(searchStr);
+      if (hashStr && hashStr.indexOf('=') !== -1) {
+        const hashParams = new URLSearchParams(hashStr);
+        for (const [key, value] of hashParams.entries()) {
+          if (!params.has(key)) params.set(key, value);
+        }
+      }
+      return params;
+    }
+
+    // Auto-detect URL Parameters
+    window.addEventListener('DOMContentLoaded', () => {
+      applyGalleryCanvasProtection();
+      const urlParams = getEffectiveParams();
+
+      if (urlParams.get('address')) {
+        const titleEl = document.getElementById('portalAddressTitle');
+        if (titleEl) titleEl.innerText = urlParams.get('address');
+        const modalSub = document.getElementById('modalPropSubtitle');
+        if (modalSub) modalSub.innerText = urlParams.get('address');
+        const genAddr = document.getElementById('genAddress');
+        if (genAddr) genAddr.value = urlParams.get('address');
+        lookupClientPropertyGallery(urlParams.get('address'));
+      }
+      if (urlParams.get('client') || urlParams.get('brokerage')) {
+        const clientTag = document.getElementById('portalClientTag');
+        const c = urlParams.get('client') || 'Client';
+        const b = urlParams.get('brokerage') || 'Brokerage';
+        if (clientTag) clientTag.innerText = `👤 Client: ${c} (${b})`;
+        if (urlParams.get('client')) document.getElementById('genClient').value = urlParams.get('client');
+        if (urlParams.get('brokerage')) document.getElementById('genBrokerage').value = urlParams.get('brokerage');
+      }
+      if (urlParams.get('price')) {
+        const p = parseInt(urlParams.get('price'), 10);
+        if (!isNaN(p)) {
+          portalUpsellState.basePrice = p;
+          recalculatePortalTotal();
+          const genP = document.getElementById('genPrice');
+          if (genP) genP.value = p;
+        }
+      }
+      if (urlParams.get('admin') === '1' || urlParams.get('toolkit') === '1') {
+        const adminBtn = document.getElementById('adminToolkitBtn');
+        if (adminBtn) adminBtn.style.display = 'inline-flex';
+      }
+
+      // SECURITY: ?paid=true is intentionally ignored. Unlock state comes only from the server (lookup_gallery).
+
+      updateGeneratedLink();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gilded Iris Photography — Instant Quote & Booking Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Google Analytics 4 (GA4 Property: 416748801 | Stream: G-F615S722W4) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F615S722W4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F615S722W4', {
+      cookie_flags: 'SameSite=None;Secure',
+      send_page_view: true
+    });
+    function trackGAEvent(eventName, params) {
+      try {
+        if (typeof gtag === 'function') {
+          gtag('event', eventName, params || {});
+        }
+      } catch (e) {}
+    }
+  </script>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-dark: #111215;
+      --card-bg: #181a1f;
+      --card-border: #282b32;
+      --gold-primary: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-hover: #b89728;
+      --text-main: #f5f6f8;
+      --text-muted: #9ba1ad;
+      --accent-green: #10b981;
+      --accent-blue: #38bdf8;
+      --radius: 12px;
+      --transition: all 0.25s ease-in-out;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      padding: 24px 16px;
+      height: auto;
+      overflow-x: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
+    .calculator-container {
+      width: 100%;
+      max-width: 860px;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+      padding: 32px 28px;
+      overflow: visible;
+    }
+
+    /* Responsive Mobile vs. Desktop Zelle Checkout Card */
+    .zelle-checkout-card {
+      background: #14161b;
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 12px;
+      padding: 18px;
+      margin: 16px 0;
+      text-align: left;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+    }
+
+    .zelle-checkout-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .zelle-copy-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .zelle-tap-copy-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px 16px;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.18), rgba(212, 175, 55, 0.06));
+      border: 1.5px solid var(--gold-primary);
+      border-radius: 10px;
+      color: #ffffff;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--transition);
+      text-align: left;
+    }
+
+    .zelle-tap-copy-btn:hover {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3), rgba(212, 175, 55, 0.12));
+      transform: translateY(-1px);
+    }
+
+    .zelle-tap-copy-btn.copied-state {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.28), rgba(16, 185, 129, 0.12));
+      border-color: var(--accent-green);
+      color: #6ee7b7;
+    }
+
+    .zelle-tap-copy-btn .copy-pill {
+      background: var(--gold-primary);
+      color: #0b0c10;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .zelle-tap-copy-btn.copied-state .copy-pill {
+      background: var(--accent-green);
+      color: #052e16;
+    }
+
+    .zelle-qr-column {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 10px;
+      border: 2px solid var(--gold-primary);
+      min-width: 156px;
+      text-align: center;
+    }
+
+    .zelle-qr-column img {
+      width: 128px;
+      height: 128px;
+      display: block;
+      border-radius: 6px;
+    }
+
+    .zelle-qr-caption {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #111215;
+      margin-top: 6px;
+      line-height: 1.3;
+    }
+
+    .zelle-email-note {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 8px;
+      font-size: 12px;
+      color: #e0f2fe;
+      line-height: 1.45;
+    }
+
+    @media (min-width: 768px) {
+      .zelle-checkout-grid {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      .zelle-qr-column {
+        display: flex;
+      }
+    }
+
+    .calc-header {
+      text-align: center;
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 20px;
+    }
+
+    .calc-tagline {
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-primary);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .calc-title {
+      font-family: 'Cinzel', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.5px;
+    }
+
+    .calc-subtitle {
+      color: var(--text-muted);
+      font-size: 13.5px;
+      margin-top: 6px;
+    }
+
+    /* Client Type Selector */
+    .section-title {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--gold-light);
+      font-weight: 600;
+      margin: 22px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .type-switcher {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .type-btn {
+      background: #1f2229;
+      border: 1.5px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .type-btn-title {
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .type-btn-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .type-btn:hover {
+      border-color: rgba(212, 175, 55, 0.5);
+      color: var(--text-main);
+    }
+
+    .type-btn.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.12);
+      color: #fff;
+    }
+
+    .type-btn.active .type-btn-subtitle {
+      color: var(--gold-light);
+    }
+
+    /* Sq Ft Tiers */
+    .sqft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .sqft-card {
+      background: #1f2229;
+      border: 1.5px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .sqft-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+      transform: translateY(-2px);
+    }
+
+    .sqft-card.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.12);
+    }
+
+    .sqft-range {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .sqft-photos {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .sqft-price {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      margin-top: 6px;
+    }
+
+    /* Add-on Services */
+    .addons-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .addon-card {
+      background: #1f2229;
+      border: 1.5px solid var(--card-border);
+      border-radius: 10px;
+      padding: 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+
+    .addon-card:hover {
+      border-color: rgba(212, 175, 55, 0.4);
+    }
+
+    .addon-card.active {
+      border-color: var(--gold-primary);
+      background: rgba(212, 175, 55, 0.08);
+    }
+
+    .addon-check {
+      width: 20px;
+      height: 20px;
+      border-radius: 5px;
+      border: 2px solid #4a4f5b;
+      margin-top: 2px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .addon-card.active .addon-check {
+      background: var(--gold-primary);
+      border-color: var(--gold-primary);
+    }
+
+    .addon-check svg {
+      fill: none;
+      stroke: #111;
+      stroke-width: 3;
+      display: none;
+      width: 12px;
+      height: 12px;
+    }
+
+    .addon-card.active .addon-check svg {
+      display: block;
+    }
+
+    .addon-info {
+      flex: 1;
+    }
+
+    .addon-name {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .addon-price {
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .addon-desc {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.35;
+    }
+
+    .featured-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #d4af37, #f3e5ab);
+      color: #0b0c10;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 4px;
+      margin-left: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Live Summary Box */
+    .summary-box {
+      background: #14161b;
+      border: 1px solid var(--gold-primary);
+      border-radius: var(--radius);
+      padding: 20px 24px;
+      margin-bottom: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .summary-left {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .summary-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text-muted);
+    }
+
+    .summary-breakdown {
+      font-size: 13.5px;
+      color: #fff;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .summary-turnaround {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent-green);
+      font-size: 12px;
+      margin-top: 6px;
+      font-weight: 600;
+    }
+
+    .payment-policy-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      color: var(--gold-light);
+      margin-top: 10px;
+      font-weight: 500;
+    }
+
+    .summary-right {
+      text-align: right;
+    }
+
+    .total-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+    }
+
+    .total-amount {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold-primary);
+      line-height: 1.1;
+    }
+
+    .deposit-callout {
+      font-size: 13px;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .discount-pill {
+      display: inline-block;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid var(--accent-green);
+      color: #a7f3d0;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 20px;
+      margin-top: 4px;
+      font-weight: 600;
+    }
+
+    /* Booking Form Fields */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 600px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .form-group.full-width {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .form-input, .form-textarea {
+      background: #1f2229;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 13.5px;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      border-color: var(--gold-primary);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 60px;
+    }
+
+    /* Submit Button */
+    .submit-btn {
+      width: 100%;
+      background-color: var(--gold-primary);
+      background: linear-gradient(135deg, #d4af37, #b89728);
+      border: none;
+      border-radius: 10px;
+      padding: 18px 24px;
+      color: #0b0c0e;
+      font-family: 'Cinzel', serif;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      transition: var(--transition);
+    }
+
+    .submit-btn:hover {
+      background-color: var(--gold-hover);
+      background: linear-gradient(135deg, #e5c358, #c9a738);
+      transform: translateY(-2px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.65);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(0, 0, 0, 0.3);
+      border-radius: 50%;
+      border-top-color: #111;
+      animation: spin 0.8s linear infinite;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .conflict-banner {
+      display: none;
+      background: rgba(239, 68, 68, 0.12);
+      border: 1.5px solid var(--accent-red);
+      border-radius: var(--radius);
+      padding: 14px 18px;
+      margin-top: 14px;
+      margin-bottom: 14px;
+      color: #fca5a5;
+      font-size: 12.5px;
+      line-height: 1.5;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .submit-guarantee {
+      text-align: center;
+      font-size: 11.5px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      line-height: 1.4;
+    }
+
+    /* Success Modal / Box */
+    .success-panel {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .success-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(16, 185, 129, 0.15);
+      border: 2px solid var(--accent-green);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+    }
+
+    .success-title {
+      font-family: 'Cinzel', serif;
+      font-size: 24px;
+      color: #fff;
+      margin-bottom: 8px;
+    }
+
+    .success-desc {
+      color: var(--text-muted);
+      font-size: 14px;
+      max-width: 500px;
+      margin: 0 auto 20px;
+      line-height: 1.5;
+    }
+
+    .type-btn:focus-visible,
+    .sqft-card:focus-visible,
+    .addon-card:focus-visible,
+    .zelle-tap-copy-btn:focus-visible,
+    .submit-btn:focus-visible {
+      outline: 2px solid var(--gold-primary);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator-container" id="calculatorApp">
+    
+    <div id="bookingFormSection">
+      <!-- Header -->
+      <div class="calc-header">
+        <div class="calc-tagline">Gilded Iris Photography • Boca Raton & Palm Beach</div>
+        <h1 class="calc-title">Instant Media Quote & Booking</h1>
+        <p class="calc-subtitle">Guaranteed 24-Hour Turnaround • MLS &amp; Airbnb Optimized • FAA Part 107 Certified</p>
+      </div>
+
+      <!-- Property Type Selector -->
+      <div class="section-title">1. Select Property Type & Billing Flow</div>
+      <div class="type-switcher" role="radiogroup" aria-label="Property Type">
+        <div class="type-btn active" data-type="residential" role="radio" aria-checked="true" tabindex="0" onclick="selectPropertyType('residential')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPropertyType('residential');}">
+          <div class="type-btn-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+            Realtor / MLS Listing
+          </div>
+          <div class="type-btn-subtitle">🔒 Pay to Unlock (Zero Upfront Payment)</div>
+        </div>
+        <div class="type-btn" data-type="airbnb" role="radio" aria-checked="false" tabindex="0" onclick="selectPropertyType('airbnb')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectPropertyType('airbnb');}">
+          <div class="type-btn-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            Airbnb / Short-Term Rental
+          </div>
+          <div class="type-btn-subtitle">💳 50% Deposit to Reserve Calendar</div>
+        </div>
+      </div>
+
+      <!-- Square Footage Tier -->
+      <div class="section-title">2. Select Property Size (Includes Free 2D Floor Plan)</div>
+      <div class="sqft-grid" id="sqftGrid" role="radiogroup" aria-label="Property Square Footage">
+        <div class="sqft-card active" data-sqft="small" data-price="195" data-photos="20-25 HDR Photos + 2D Floor Plan" role="radio" aria-checked="true" tabindex="0" onclick="selectSqft('small', 195, '20-25 HDR Photos + 2D Floor Plan', '< 1,500 sq ft')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSqft('small', 195, '20-25 HDR Photos + 2D Floor Plan', '< 1,500 sq ft');}">
+          <div class="sqft-range">&lt; 1,500 sq ft</div>
+          <div class="sqft-photos">20–25 HDR + Floor Plan</div>
+          <div class="sqft-price">$195</div>
+        </div>
+        <div class="sqft-card" data-sqft="medium" data-price="245" data-photos="30-35 HDR Photos + 2D Floor Plan" role="radio" aria-checked="false" tabindex="0" onclick="selectSqft('medium', 245, '30-35 HDR Photos + 2D Floor Plan', '1,500 – 2,500 sq ft')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSqft('medium', 245, '30-35 HDR Photos + 2D Floor Plan', '1,500 – 2,500 sq ft');}">
+          <div class="sqft-range">1,500–2,500 sq ft</div>
+          <div class="sqft-photos">30–35 HDR + Floor Plan</div>
+          <div class="sqft-price">$245</div>
+        </div>
+        <div class="sqft-card" data-sqft="large" data-price="315" data-photos="40-45 HDR Photos + 2D Floor Plan" role="radio" aria-checked="false" tabindex="0" onclick="selectSqft('large', 315, '40-45 HDR Photos + 2D Floor Plan', '2,501 – 3,800 sq ft')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSqft('large', 315, '40-45 HDR Photos + 2D Floor Plan', '2,501 – 3,800 sq ft');}">
+          <div class="sqft-range">2,501–3,800 sq ft</div>
+          <div class="sqft-photos">40–45 HDR + Floor Plan</div>
+          <div class="sqft-price">$315</div>
+        </div>
+        <div class="sqft-card" data-sqft="estate" data-price="425" data-photos="50-55 HDR Photos + 2D Floor Plan" role="radio" aria-checked="false" tabindex="0" onclick="selectSqft('estate', 425, '50-55 HDR Photos + 2D Floor Plan', '3,801 – 5,000 sq ft')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSqft('estate', 425, '50-55 HDR Photos + 2D Floor Plan', '3,801 – 5,000 sq ft');}">
+          <div class="sqft-range">3,801–5,000 sq ft</div>
+          <div class="sqft-photos">50–55 HDR + Floor Plan</div>
+          <div class="sqft-price">$425</div>
+        </div>
+        <div class="sqft-card" data-sqft="mansion" data-price="550" data-photos="60+ Luxury Photos + 2D Floor Plan" role="radio" aria-checked="false" tabindex="0" onclick="selectSqft('mansion', 550, '60+ Luxury Photos + 2D Floor Plan', '5,000+ sq ft')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();selectSqft('mansion', 550, '60+ Luxury Photos + 2D Floor Plan', '5,000+ sq ft');}">
+          <div class="sqft-range">5,000+ sq ft</div>
+          <div class="sqft-photos">60+ HDR + Floor Plan</div>
+          <div class="sqft-price">$550</div>
+        </div>
+      </div>
+
+      <!-- Add-on Services -->
+      <div class="section-title">3. Media Add-Ons & Viral Upgrades</div>
+      <div class="addons-list">
+        <!-- FPV Flythrough -->
+        <div class="addon-card" id="addon-fpv" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('fpv', 225, 'One-Shot FPV Drone Flythrough')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('fpv', 225, 'One-Shot FPV Drone Flythrough');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">
+              One-Shot FPV Drone Flythrough
+              <span class="featured-badge">Viral</span>
+            </div>
+            <div class="addon-desc">Continuous high-speed drone flight flying in the front doors, through luxury interiors, and out to the pool patio.</div>
+            <div class="addon-price">+$225</div>
+          </div>
+        </div>
+
+        <!-- FAA Part 107 Aerial Stills -->
+        <div class="addon-card" id="addon-drone" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('drone', 95, 'FAA Drone Aerial Stills (6-8 Photos)')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('drone', 95, 'FAA Drone Aerial Stills (6-8 Photos)');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">FAA Part 107 Drone Aerials</div>
+            <div class="addon-desc">6–8 high-resolution aerial photos showing lot size, roof condition, neighborhood, and coastal proximity.</div>
+            <div class="addon-price">+$95</div>
+          </div>
+        </div>
+
+        <!-- 4K Walkthrough Video / Reel -->
+        <div class="addon-card" id="addon-video" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('video', 175, 'Cinematic 60s 4K Walkthrough / Social Reel')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('video', 175, 'Cinematic 60s 4K Walkthrough / Social Reel');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">Cinematic 4K Walkthrough / Reel</div>
+            <div class="addon-desc">Edited 60-second video with licensed music, smooth gimbal movement, vertical Instagram/TikTok ready.</div>
+            <div class="addon-price">+$175</div>
+          </div>
+        </div>
+
+        <!-- Condo & Community Amenities -->
+        <div class="addon-card" id="addon-amenities" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('amenities', 75, 'Condo / Community Amenities (8-12 HDR Photos)')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('amenities', 75, 'Condo / Community Amenities (8-12 HDR Photos)');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">Condo &amp; Community Amenities (8–12 Photos)</div>
+            <div class="addon-desc">8–12 HDR photos of building &amp; resort amenities: pool deck, fitness center, clubhouse, lobby, tennis/pickleball, and beach access.</div>
+            <div class="addon-price">+$75</div>
+          </div>
+        </div>
+
+        <!-- Virtual Twilight -->
+        <div class="addon-card" id="addon-twilight" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('twilight', 45, 'Virtual Twilight Hero Shot (2 Images)')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('twilight', 45, 'Virtual Twilight Hero Shot (2 Images)');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">Virtual Twilight (2 Images)</div>
+            <div class="addon-desc">Day-to-dusk transformation with glowing interior/exterior warm lights and sunset skies. Boosts click-through 300%.</div>
+            <div class="addon-price">+$45</div>
+          </div>
+        </div>
+
+        <!-- Lawn Greening -->
+        <div class="addon-card" id="addon-lawn" role="checkbox" aria-checked="false" tabindex="0" onclick="toggleAddon('lawn', 35, 'Lawn Greening & Blue Sky Enhancement')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleAddon('lawn', 35, 'Lawn Greening & Blue Sky Enhancement');}">
+          <div class="addon-check">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div class="addon-info">
+            <div class="addon-name">Lawn Greening & Blue Sky Enhancement</div>
+            <div class="addon-desc">Digital correction of patchy Florida turf, yellow grass, and overcast skies for pristine curb appeal.</div>
+            <div class="addon-price">+$35</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Summary & Pricing Callout -->
+      <div class="summary-box">
+        <div class="summary-left">
+          <div class="summary-title">Selected Package Summary</div>
+          <div class="summary-breakdown" id="summaryText">Residential MLS (&lt; 1,500 sq ft) • 20–25 HDR Photos + 2D Floor Plan</div>
+          <div class="summary-turnaround">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            Guaranteed 24-Hour Turnaround
+          </div>
+          <div class="payment-policy-badge" id="paymentPolicyBadge">
+            🔒 Pay to Unlock: Review watermarked gallery first. Zero upfront card required.
+          </div>
+        </div>
+        <div class="summary-right">
+          <div class="total-label" id="totalLabel">Estimated Total</div>
+          <div class="total-amount" id="totalDisplay">$195</div>
+          <div id="depositBreakdown" class="deposit-callout" style="display: none;">
+            50% Due Today to Lock Slot: <strong id="depositDisplay" style="color: #fff;">$98</strong>
+          </div>
+          <div id="bundleSavings" class="discount-pill" style="display: none;">Bundle Savings Applied: -$50</div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <div class="section-title">4. Property Details & Preferred Schedule</div>
+      <form id="orderForm" onsubmit="handleBookingSubmit(event)">
+      <!-- Anti-Spam Honeypot Field -->
+      <input type="text" name="company_website_hp" id="company_website_hp" tabindex="-1" autocomplete="off" style="position:absolute; left:-9999px; opacity:0;">
+      <div style="position: absolute; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;" aria-hidden="true">
+        <label for="orderWebsite">Leave blank</label>
+        <input type="text" id="orderWebsite" name="website" tabindex="-1" autocomplete="off">
+      </div>
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="clientName">Full Name *</label>
+            <input type="text" id="clientName" class="form-input" placeholder="e.g. Sarah Jenkins" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="clientEmail">Email Address *</label>
+            <input type="email" id="clientEmail" class="form-input" placeholder="e.g. sarah@compass.com" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="clientPhone">Phone Number *</label>
+            <input type="tel" id="clientPhone" class="form-input" placeholder="(561) 555-0192" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" id="brokerageLabel" for="clientBrokerage">Brokerage / Agency</label>
+            <input type="text" id="clientBrokerage" class="form-input" placeholder="e.g. Compass Boca Raton / Douglas Elliman">
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="propAddress">Property Address *</label>
+            <input type="text" id="propAddress" class="form-input" placeholder="e.g. 1200 Ocean Blvd, Boca Raton, FL 33432" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="shootDate">Preferred Shoot Date *</label>
+            <input type="date" id="shootDate" class="form-input" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="shootTime">Preferred Time Window *</label>
+            <select id="shootTime" class="form-input" required>
+              <option value="Morning (9:00 AM - 12:00 PM)">Morning (9:00 AM – 12:00 PM)</option>
+              <option value="Afternoon (1:00 PM - 4:00 PM)">Afternoon (1:00 PM – 4:00 PM)</option>
+              <option value="Golden Hour / Sunset (5:00 PM - 7:00 PM)">Golden Hour / Sunset (5:00 PM – 7:00 PM)</option>
+            </select>
+            <div id="shootTimeBadge" style="font-size: 11.5px; margin-top: 6px; color: var(--gold-primary); display: none;"></div>
+          </div>
+
+          <div class="form-group full-width">
+            <label class="form-label" for="accessNotes">Access Details / Special Instructions</label>
+            <textarea id="accessNotes" class="form-textarea" placeholder="e.g. Supra / lockbox code, gate code, tenant notes, key highlight features (pool, newly renovated kitchen, etc.)"></textarea>
+          </div>
+        </div>
+
+        <!-- Conflict Notice Banner -->
+        <div id="bookingConflictBox" class="conflict-banner">
+          <div style="font-weight: 700; display: flex; align-items: center; gap: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            <span id="conflictTitle">Time Slot Unavailable</span>
+          </div>
+          <div id="conflictMsg" style="margin-top: 4px; font-size: 12px; opacity: 0.95;">
+            The selected window was just reserved on the calendar. We have automatically logged your request on our Priority Waitlist! Please choose another opening above.
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Request Shoot • Pay Upon Delivery ($195)
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </button>
+        <p class="submit-guarantee" id="submitGuarantee">
+          🔒 Pay to Unlock Guarantee: No upfront card required. You review the watermarked media gallery first, and pay to release instant unwatermarked downloads.
+        </p>
+      </form>
+    </div>
+
+    <!-- Success Panel -->
+    <div id="successPanel" class="success-panel">
+      <div class="success-icon">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <h2 class="success-title" id="succHeader">Shoot Slot Provisionally Held!</h2>
+      <p class="success-desc" id="successSummary">
+        Thank you! We've provisionally held your slot for <strong><span id="succAddress"></span></strong> on <strong><span id="succDate"></span></strong>. Total quote: <strong><span id="succTotal"></span></strong>.
+      </p>
+
+      <!-- Realtor Next Steps (Pay to Unlock via Zelle) -->
+      <div id="realtorSuccessSteps" style="background: #1f2229; border: 1px solid #282b32; border-radius: 10px; padding: 20px; max-width: 560px; margin: 0 auto 24px; text-align: left; font-size: 13px;">
+        <div style="color: var(--gold-primary); font-weight: 700; margin-bottom: 8px; font-size: 14px;">Realtor Pay-to-Unlock &amp; Zelle Reference:</div>
+        <div style="color: #cbd5e1; line-height: 1.6;">
+          1. <strong>Calendar Hold:</strong> Provisionally held as <code>[PENDING ZELLE]</code> on Jorge's Google Calendar.<br>
+          2. <strong>Weather &amp; FAA Airspace Clearance:</strong> Verified within 2 hours.<br>
+          3. <strong>24-Hour Delivery &amp; Zelle Pay-to-Unlock:</strong> Use your unique Memo Code below when settling your invoice via Zelle:
+        </div>
+        <div id="realtorZelleCardBox"></div>
+      </div>
+
+      <!-- Airbnb Next Steps (50% Deposit via Zelle) -->
+      <div id="airbnbSuccessSteps" style="display: none; background: #1f2229; border: 1px solid var(--gold-primary); border-radius: 10px; padding: 22px; max-width: 560px; margin: 0 auto 24px; text-align: left; font-size: 13px;">
+        <div style="color: var(--gold-primary); font-weight: 700; margin-bottom: 8px; font-size: 14px;">Airbnb Session Confirmation &amp; 50% Zelle Deposit:</div>
+        <p style="color: #cbd5e1; line-height: 1.5; margin-bottom: 12px;">
+          To lock your shoot date on our calendar, please send your 50% deposit of <strong><span id="succDeposit" style="color: var(--gold-primary); font-size: 16px;"></span></strong> via Zelle using your Memo Code below. We have also dispatched these details to <strong id="succEmail" style="color: #fff;"></strong> (<span id="succPhone"></span>).
+        </p>
+        <div id="airbnbZelleCardBox"></div>
+      </div>
+
+      <button onclick="resetCalculator()" class="submit-btn" style="max-width: 240px; margin: 0 auto; padding: 12px 18px; font-size: 14px; background: #282b32; color: #fff;">
+        Book Another Property
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    // ==============================================================
+    // GILDED IRIS INTEGRATION CONFIGURATION (Zelle Direct Workflow)
+    // ==============================================================
+    const CONFIG = {
+      googleCalendarScriptUrl: "https://script.google.com/macros/s/AKfycbwqf-M6hc5f3PnxW9rwx2tz7nu9cSObqrE0ZhNgV5QjXw3bSL-FXnJQcqTc4Wck8ptF5w/exec",
+      zelleEmail: "jembid1979@gmail.com",
+      zelleRecipientName: "Jorge Embid",
+      zelleBusinessName: "Gilded Iris Photography"
+    };
+
+    // Universal Iframe-Safe "Copy to Clipboard" Utility (Fixes iOS Safari / Chrome Permission Block in Google Sites)
+    function copyToClipboard(text, btnEl) {
+      let copied = false;
+      try {
+        const ta = document.createElement('textarea');
+        ta.value = String(text || '');
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        ta.style.top = '-9999px';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.focus();
+        ta.select();
+        ta.setSelectionRange(0, 99999);
+        copied = document.execCommand('copy');
+        document.body.removeChild(ta);
+      } catch (e) {
+        console.warn('Fallback copy error:', e);
+      }
+
+      if (btnEl) {
+        const pill = btnEl.querySelector('.copy-pill');
+        if (pill) {
+          if (!btnEl.dataset.origPill) btnEl.dataset.origPill = pill.innerText;
+          btnEl.classList.add('copied-state');
+          pill.innerText = '✓ Copied!';
+          setTimeout(() => {
+            btnEl.classList.remove('copied-state');
+            pill.innerText = btnEl.dataset.origPill || 'Copy';
+          }, 2000);
+        } else {
+          if (!btnEl.dataset.origHtml) btnEl.dataset.origHtml = btnEl.innerHTML;
+          btnEl.classList.add('copied-state');
+          btnEl.innerText = '✓ Copied!';
+          setTimeout(() => {
+            btnEl.classList.remove('copied-state');
+            btnEl.innerHTML = btnEl.dataset.origHtml;
+          }, 2000);
+        }
+      }
+      return copied;
+    }
+
+    // Auto-Generated Booking Reference / Memo Code: GIP-[4-Digit-Random]-[StreetNumber]
+    function generateMemoCode(propertyAddress) {
+      const addrStr = String(propertyAddress || '').trim();
+      const streetMatch = addrStr.match(/\b(\d{1,6})\b/);
+      const streetNum = streetMatch ? streetMatch[1] : '100';
+      const rand4 = Math.floor(1000 + Math.random() * 9000);
+      return `GIP-${rand4}-${streetNum}`;
+    }
+
+    function buildResponsiveZelleCheckoutHtml(amountDue, memoCode, labelTitle) {
+      const cleanAmt = Number(amountDue || 0).toFixed(0);
+      const qrData = encodeURIComponent(`Zelle:${CONFIG.zelleEmail}|Amount:${cleanAmt}|Memo:${memoCode}`);
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&margin=4&data=${qrData}`;
+      return `
+        <div class="zelle-checkout-card">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px;">
+            <span style="font-size:11.5px;text-transform:uppercase;color:var(--gold-primary);font-weight:700;letter-spacing:0.6px;">⚡ ${labelTitle || 'Zelle Direct Bank Transfer (Zero Fees)'}</span>
+            <span style="font-family:monospace;font-size:12px;color:#cbd5e1;">Ref: <strong style="color:var(--gold-light);">${memoCode}</strong></span>
+          </div>
+          <div class="zelle-checkout-grid">
+            <div class="zelle-copy-stack">
+              <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard('${CONFIG.zelleEmail}', this)">
+                <div>
+                  <div style="font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;">1. Copy Zelle Recipient (${CONFIG.zelleRecipientName})</div>
+                  <div style="font-family:monospace;font-size:14px;color:var(--gold-light);margin-top:2px;">${CONFIG.zelleEmail}</div>
+                </div>
+                <span class="copy-pill">Copy Recipient</span>
+              </button>
+
+              <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard('${cleanAmt}', this)">
+                <div>
+                  <div style="font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;">2. Copy Exact Total ($${cleanAmt})</div>
+                  <div style="font-family:monospace;font-size:14px;color:#6ee7b7;margin-top:2px;">$${cleanAmt}.00</div>
+                </div>
+                <span class="copy-pill">Copy Total ($${cleanAmt})</span>
+              </button>
+
+              <button type="button" class="zelle-tap-copy-btn" onclick="copyToClipboard('${memoCode}', this)">
+                <div>
+                  <div style="font-size:10.5px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.4px;">3. Copy Memo Code (${memoCode})</div>
+                  <div style="font-family:monospace;font-size:14px;color:#fcd34d;margin-top:2px;">${memoCode}</div>
+                </div>
+                <span class="copy-pill">Copy Memo</span>
+              </button>
+            </div>
+
+            <div class="zelle-qr-column">
+              <img loading="lazy" decoding="async" src="${qrUrl}" alt="Zelle QR Code for ${CONFIG.zelleEmail}">
+              <div class="zelle-qr-caption">Scan with Bank App<br><span style="font-weight:500;color:#475569;">${CONFIG.zelleEmail}</span></div>
+            </div>
+          </div>
+          <div class="zelle-email-note">
+            ✉️ <em>We have also emailed these payment details to you so you can easily switch to your banking app.</em>
+          </div>
+        </div>
+      `;
+    }
+
+    // State management
+    const state = {
+      propertyType: 'residential',
+      sqftTier: 'small',
+      basePrice: 195,
+      sqftLabel: '< 1,500 sq ft',
+      photosLabel: '20–25 HDR Photos + 2D Floor Plan',
+      addons: {},
+      total: 195,
+      deposit: 98
+    };
+
+    // Set default date to tomorrow
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    document.getElementById('shootDate').value = tomorrow.toISOString().split('T')[0];
+    document.getElementById('shootDate').min = new Date().toISOString().split('T')[0];
+
+    function selectPropertyType(type) {
+      state.propertyType = type;
+      document.querySelectorAll('.type-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-type') === type);
+      });
+
+      const policyBadge = document.getElementById('paymentPolicyBadge');
+      const depositBox = document.getElementById('depositBreakdown');
+      const submitGuarantee = document.getElementById('submitGuarantee');
+      const brokerageLabel = document.getElementById('brokerageLabel');
+      const brokerageInput = document.getElementById('clientBrokerage');
+
+      if (type === 'residential') {
+        policyBadge.innerHTML = '🔒 Pay to Unlock: Review watermarked gallery first. Zero upfront card required.';
+        depositBox.style.display = 'none';
+        submitGuarantee.innerHTML = '🔒 Pay to Unlock Guarantee: No upfront card required. You review the watermarked media gallery first, and pay via Zelle to release instant unwatermarked downloads.';
+        brokerageLabel.innerText = 'Brokerage / Agency';
+        brokerageInput.placeholder = 'e.g. Compass Boca Raton / Douglas Elliman';
+      } else {
+        policyBadge.innerHTML = '⚡ 50% Zelle Deposit to Reserve: Secures date on calendar. Remaining 50% due on shoot day.';
+        depositBox.style.display = 'block';
+        submitGuarantee.innerHTML = '⚡ Secure Booking: 50% Zelle deposit required to hold calendar slot. Complimentary weather & FAA reschedule policy.';
+        brokerageLabel.innerText = 'Property Management / Host Brand';
+        brokerageInput.placeholder = 'e.g. VRBO Superhost / Boca Luxury Stays';
+      }
+
+      calculateTotal();
+      trackGAEvent('select_property_type', { property_type: type });
+    }
+
+    function selectSqft(tier, price, photos, label) {
+      state.sqftTier = tier;
+      state.basePrice = price;
+      state.photosLabel = photos;
+      state.sqftLabel = label;
+
+      document.querySelectorAll('.sqft-card').forEach(card => {
+        card.classList.toggle('active', card.getAttribute('data-sqft') === tier);
+      });
+      calculateTotal();
+      trackGAEvent('select_sqft_tier', { sqft_tier: tier, base_price: price, sqft_label: label });
+    }
+
+    function toggleAddon(key, price, name) {
+      const el = document.getElementById('addon-' + key);
+      const isAdded = !state.addons[key];
+      if (state.addons[key]) {
+        delete state.addons[key];
+        el.classList.remove('active');
+      } else {
+        state.addons[key] = { price, name };
+        el.classList.add('active');
+      }
+      calculateTotal();
+      trackGAEvent('toggle_addon', { addon_id: key, addon_name: name, addon_price: price, selected: isAdded });
+    }
+
+    function calculateTotal() {
+      let addonTotal = 0;
+      let addonCount = 0;
+      for (const k in state.addons) {
+        addonTotal += state.addons[k].price;
+        addonCount++;
+      }
+
+      let subtotal = state.basePrice + addonTotal;
+      let discount = 0;
+
+      // Bundle savings incentive
+      if (addonCount >= 4) {
+        discount = 75;
+      } else if (addonCount >= 3) {
+        discount = 50;
+      } else if (addonCount >= 2) {
+        discount = 25;
+      }
+
+      state.total = Math.max(0, subtotal - discount);
+      state.deposit = Math.round(state.total * 0.5);
+
+      document.getElementById('totalDisplay').innerText = '$' + state.total;
+      document.getElementById('depositDisplay').innerText = '$' + state.deposit;
+
+      // Update summary breakdown
+      let summaryStr = `${state.propertyType === 'residential' ? 'Residential MLS' : 'Airbnb STR'} (${state.sqftLabel}) • ${state.photosLabel}`;
+      if (addonCount > 0) {
+        summaryStr += ` + ${addonCount} Add-on${addonCount > 1 ? 's' : ''}`;
+      }
+      document.getElementById('summaryText').innerText = summaryStr;
+
+      // Update discount badge
+      const discountPill = document.getElementById('bundleSavings');
+      if (discount > 0) {
+        discountPill.style.display = 'inline-block';
+        discountPill.innerText = `Bundle Discount Applied: -$${discount}`;
+      } else {
+        discountPill.style.display = 'none';
+      }
+
+      // Update submit button text based on persona
+      const submitBtn = document.getElementById('submitBtn');
+      if (state.propertyType === 'residential') {
+        submitBtn.innerHTML = `Request Shoot • Pay Upon Delivery ($${state.total}) <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+      } else {
+        submitBtn.innerHTML = `Lock Date with 50% Zelle Deposit ($${state.deposit}) <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>`;
+      }
+    }
+
+    async function handleBookingSubmit(e) {
+      e.preventDefault();
+
+      const timeSelect = document.getElementById('shootTime');
+      if (timeSelect.selectedOptions[0] && timeSelect.selectedOptions[0].disabled) {
+        alert('⚠️ The selected time window is already reserved. Please choose an available window.');
+        return;
+      }
+
+      const conflictBox = document.getElementById('bookingConflictBox');
+      if (conflictBox) conflictBox.style.display = 'none';
+
+      const btn = document.getElementById('submitBtn');
+      const originalBtnText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `<span class="spinner"></span> Checking Calendar & Securing Hold...`;
+
+      const hpCompanyVal = (document.getElementById('company_website_hp')?.value || '').trim();
+      const honeypotVal = hpCompanyVal || (document.getElementById('orderWebsite')?.value || '').trim();
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+      const phone = document.getElementById('clientPhone').value;
+      const brokerage = document.getElementById('clientBrokerage').value;
+      const address = document.getElementById('propAddress').value;
+      const date = document.getElementById('shootDate').value;
+      const time = document.getElementById('shootTime').value;
+      const notes = document.getElementById('accessNotes').value;
+      let memoCode = generateMemoCode(address);
+
+      const bookingPayload = {
+        action: "booking_request",
+        company_website_hp: hpCompanyVal,
+        website: honeypotVal,
+        memoCode: memoCode,
+        clientName: name,
+        clientEmail: email,
+        clientPhone: phone,
+        brokerage: brokerage,
+        propertyAddress: address,
+        shootDate: date,
+        timeWindow: time,
+        propertyType: state.propertyType,
+        sqftTierId: state.sqftTier,
+        sqftTier: state.sqftLabel,
+        addonIds: Object.keys(state.addons),
+        addons: Object.values(state.addons).map(a => a.name),
+        totalPrice: state.total,
+        depositDue: state.deposit,
+        accessNotes: notes
+      };
+
+      // 1. Sync to Google Calendar & Google Sheet via CORS-Safe POST (text/plain;charset=utf-8 avoids OPTIONS preflight)
+      if (!honeypotVal && CONFIG.googleCalendarScriptUrl && CONFIG.googleCalendarScriptUrl.startsWith("http")) {
+        try {
+          const response = await fetch(CONFIG.googleCalendarScriptUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+            body: JSON.stringify(bookingPayload)
+          });
+          const result = await response.json();
+
+          if (result && result.status === 'conflict') {
+            btn.disabled = false;
+            btn.innerHTML = originalBtnText;
+
+            if (conflictBox) {
+              conflictBox.style.display = 'block';
+              document.getElementById('conflictMsg').innerText = 
+                result.message || "That time window was just claimed. We've logged your request on our Priority Waitlist! Please choose another opening above.";
+              conflictBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            alert('⚠️ Time slot was just reserved on the calendar. Priority waitlist logged.');
+            return;
+          }
+
+          if (result && result.memoCode) memoCode = result.memoCode;
+          if (result && result.expectedTotal) state.total = result.expectedTotal;
+          if (result && result.depositDue) state.deposit = result.depositDue;
+
+        } catch (fetchErr) {
+          console.warn("CORS-safe POST fallback to GET:", fetchErr);
+          try {
+            const syncUrl = `${CONFIG.googleCalendarScriptUrl}?action=booking_request&data=${encodeURIComponent(JSON.stringify(bookingPayload))}`;
+            await fetch(syncUrl);
+          } catch (getErr) {
+            console.error("Fallback sync queued:", getErr);
+          }
+        }
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = originalBtnText;
+
+      // Display success view with Dual Responsive Zelle Checkout Card
+      document.getElementById('succAddress').innerText = address;
+      document.getElementById('succDate').innerText = date + ' (' + time + ')';
+      document.getElementById('succTotal').innerText = `$${state.total} (Memo: ${memoCode})`;
+      document.getElementById('succDeposit').innerText = '$' + state.deposit;
+      document.getElementById('succEmail').innerText = email;
+      const phoneEl = document.getElementById('succPhone');
+      if (phoneEl) phoneEl.innerText = phone;
+
+      const realtorCardBox = document.getElementById('realtorZelleCardBox');
+      if (realtorCardBox) {
+        realtorCardBox.innerHTML = buildResponsiveZelleCheckoutHtml(state.total, memoCode, 'Zelle Payment Details (Save or Pay Now)');
+      }
+      const airbnbCardBox = document.getElementById('airbnbZelleCardBox');
+      if (airbnbCardBox) {
+        airbnbCardBox.innerHTML = buildResponsiveZelleCheckoutHtml(state.deposit, memoCode, 'Send 50% Deposit via Zelle');
+      }
+
+      document.getElementById('bookingFormSection').style.display = 'none';
+      document.getElementById('successPanel').style.display = 'block';
+      trackGAEvent('generate_lead', {
+        currency: 'USD',
+        value: state.total,
+        property_type: state.propertyType,
+        sqft_tier: state.sqftTier,
+        memo_code: memoCode
+      });
+
+      if (state.propertyType === 'residential') {
+        document.getElementById('succHeader').innerText = 'Shoot Slot Provisionally Held (Pay to Unlock)';
+        document.getElementById('realtorSuccessSteps').style.display = 'block';
+        document.getElementById('airbnbSuccessSteps').style.display = 'none';
+      } else {
+        document.getElementById('succHeader').innerText = 'Airbnb Booking Provisionally Held!';
+        document.getElementById('realtorSuccessSteps').style.display = 'none';
+        document.getElementById('airbnbSuccessSteps').style.display = 'block';
+      }
+    }
+
+    function resetCalculator() {
+      document.getElementById('orderForm').reset();
+      const timeSelect = document.getElementById('shootTime');
+      Array.from(timeSelect.options).forEach(opt => {
+        opt.disabled = false;
+        opt.text = opt.value;
+      });
+      const badge = document.getElementById('shootTimeBadge');
+      if (badge) badge.style.display = 'none';
+      document.getElementById('bookingFormSection').style.display = 'block';
+      document.getElementById('successPanel').style.display = 'none';
+    }
+
+    // Live Calendar Conflict Prevention Setup
+    const shootDateInput = document.getElementById('shootDate');
+    if (shootDateInput) {
+      shootDateInput.min = new Date().toISOString().split('T')[0];
+      shootDateInput.addEventListener('change', async function() {
+        const chosenDate = this.value;
+        if (!chosenDate || !CONFIG.googleCalendarScriptUrl || !CONFIG.googleCalendarScriptUrl.startsWith('http')) return;
+
+        const timeSelect = document.getElementById('shootTime');
+        const badge = document.getElementById('shootTimeBadge');
+        if (badge) {
+          badge.style.display = 'block';
+          badge.innerHTML = '<span style="color: var(--text-muted);">⏳ Checking calendar availability...</span>';
+        }
+
+        try {
+          const res = await fetch(`${CONFIG.googleCalendarScriptUrl}?action=check_availability&date=${chosenDate}`);
+          const data = await res.json();
+          if (data.status === 'success' && data.bookedSlots) {
+            let availableCount = 0;
+            Array.from(timeSelect.options).forEach(opt => {
+              const baseName = opt.value.split(' ')[0].toLowerCase();
+              const isBooked = data.bookedSlots.some(slot => slot.toLowerCase().includes(baseName));
+              opt.text = opt.value;
+              if (isBooked) {
+                opt.disabled = true;
+                opt.text = opt.value + ' — 🔒 Reserved';
+              } else {
+                opt.disabled = false;
+                opt.text = opt.value;
+                availableCount++;
+              }
+            });
+
+            if (timeSelect.selectedOptions[0] && timeSelect.selectedOptions[0].disabled) {
+              const nextAvail = Array.from(timeSelect.options).find(o => !o.disabled);
+              if (nextAvail) timeSelect.value = nextAvail.value;
+            }
+
+            if (badge) {
+              if (availableCount === 0) {
+                badge.innerHTML = '<span style="color: #ef4444; font-weight: 600;">⚠️ All windows booked on this date. Please pick another day.</span>';
+              } else {
+                badge.innerHTML = `<span style="color: #10b981; font-weight: 600;">✓ Live Calendar: ${availableCount} time window${availableCount > 1 ? 's' : ''} available</span>`;
+              }
+            }
+          }
+        } catch (err) {
+          if (badge) badge.style.display = 'none';
+        }
+      });
+    }
+
+    // Google Sites Sandboxed Iframe Height Sync
+    function notifyIframeParentHeight() {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage({
+          type: 'gip-embed-resize',
+          frameId: 'gipPricingCalculator',
+          height: document.documentElement.scrollHeight || document.body.scrollHeight
+        }, '*');
+      }
+    }
+    window.addEventListener('load', notifyIframeParentHeight);
+    window.addEventListener('resize', notifyIframeParentHeight);
+  </script>
+</body>
+</html>

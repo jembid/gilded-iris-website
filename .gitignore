@@ -1,0 +1,10 @@
+# Never publish backend Apps Script or admin keys to public GitHub Pages
+*.gs
+.agent/
+IntroFlythrough.mp4
+google_sites_complete_suite.html
+google_sites_hub.html
+hero_video_banner.html
+test_google_sites_simulation.html
+Thumbs.db
+.DS_Store
